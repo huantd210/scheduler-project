@@ -1,19 +1,25 @@
 <template>
   <div id="app">
     <el-container>
-      <el-aside width="200px"><Aside /></el-aside>
-      <el-main>Main</el-main>
+      <el-aside width="200px" class="h-screen overflow-scroll"
+        ><Aside />
+      </el-aside>
+      <el-main class="p-0 h-screen border border-gray-100 overflow-scroll"
+        ><Schedule />
+      </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
 import Aside from "./components/Aside/index.vue";
+import Schedule from "./components/Schedule/index.vue";
 
 export default {
   name: "App",
   components: {
     Aside,
+    Schedule,
   },
 };
 </script>
@@ -23,8 +29,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
