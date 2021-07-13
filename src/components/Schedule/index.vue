@@ -1,23 +1,24 @@
 <template>
   <div>
-    <Timeline :start="start" :end="end" :height="height" />
+    <Timeline :start="start" :end="end" />
+    <Grid :start="start" :end="end" />
   </div>
 </template>
 <script>
 import Timeline from "./Timeline/index.vue";
+import Grid from "./Grid/index.vue";
 
 export default {
   name: "schedule",
   components: {
     Timeline,
+    Grid,
   },
   data() {
     return {
       start: 1,
       end: 12, // 12 months
       // slice: 4, // 4 weeks
-      height: 120,
-      // width: 200, // width of block
     };
   },
 };

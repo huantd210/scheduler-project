@@ -9,7 +9,7 @@
         overflow-hidden
       "
     >
-      <span>Tháng {{ block.month }}</span>
+      <span class="text-white">Tháng {{ block.month }}</span>
     </div>
     <div class="timeline-block__day" :style="bottomBlockStyle">
       <Cell

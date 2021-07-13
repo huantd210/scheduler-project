@@ -38,6 +38,7 @@ export default {
 
 .cell-day,
 .cell-th {
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;

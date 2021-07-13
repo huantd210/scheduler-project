@@ -27,14 +27,12 @@ export default {
       type: Number,
       required: true,
     },
-    width: {
-      type: Number,
-      default: 35,
-    },
-    height: {
-      type: Number,
-      default: 120,
-    },
+  },
+  data() {
+    return {
+      height: 120,
+      // width: 200, // width of block
+    };
   },
   computed: {
     getBlocks() {
