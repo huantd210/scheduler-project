@@ -1,5 +1,101 @@
 {
     "projects": [
-        
+        {
+            "id": "id-1",
+            "name": "SNAVI",
+            "timeStart": "2021-01-01",
+            "timeEnd": "2021-07-01",
+            "guarantee": 45,
+            "type": "Đàm phán"
+        },
+        {
+            "id": "id-2",
+            "name": "SNAVI 2",
+            "timeStart": "2021-03-01",
+            "timeEnd": "2021-08-01",
+            "guarantee": 45,
+            "type": "Đã đàm phán"
+        },
+        {
+            "id": "id-3",
+            "name": "SNAVI 3",
+            "timeStart": "2021-06-01",
+            "timeEnd": "2021-09-01",
+            "guarantee": 45,
+            "type": "Bắt đầu"
+        },
+        {
+            "id": "id-4",
+            "name": "SNAVI 4",
+            "timeStart": "2021-03-01",
+            "timeEnd": "2021-06-01",
+            "guarantee": 45,
+            "type": "Kết thúc"
+        },
+        {
+            "id": "id-5",
+            "name": "SNAVI",
+            "timeStart": "2021-01-01",
+            "timeEnd": "2021-07-01",
+            "guarantee": 45,
+            "type": "Đàm phán"
+        },
+        {
+            "id": "id-6",
+            "name": "SNAVI 2",
+            "timeStart": "2021-03-01",
+            "timeEnd": "2021-08-01",
+            "guarantee": 45,
+            "type": "Đã đàm phán"
+        },
+        {
+            "id": "id-7",
+            "name": "SNAVI 3",
+            "timeStart": "2021-06-01",
+            "timeEnd": "2021-09-01",
+            "guarantee": 45,
+            "type": "Bắt đầu"
+        },
+        {
+            "id": "id-8",
+            "name": "SNAVI 4",
+            "timeStart": "2021-03-01",
+            "timeEnd": "2021-06-01",
+            "guarantee": 45,
+            "type": "Kết thúc"
+        },
+        {
+            "id": "id-9",
+            "name": "SNAVI",
+            "timeStart": "2021-01-01",
+            "timeEnd": "2021-07-01",
+            "guarantee": 45,
+            "type": "Đàm phán"
+        },
+        {
+            "id": "id-10",
+            "name": "SNAVI 2",
+            "timeStart": "2021-03-01",
+            "timeEnd": "2021-08-01",
+            "guarantee": 45,
+            "type": "Đã đàm phán"
+        },
+        {
+            "id": "id-11",
+            "name": "SNAVI 3",
+            "timeStart": "2021-06-01",
+            "timeEnd": "2021-09-01",
+            "guarantee": 45,
+            "type": "Bắt đầu"
+        },
+        {
+            "id": "id-12",
+            "name": "SNAVI 4",
+            "timeStart": "2021-03-01",
+            "timeEnd": "2021-06-01",
+            "guarantee": 45,
+            "type": "Kết thúc"
+        }
+       
     ]
 }

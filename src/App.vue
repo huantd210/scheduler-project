@@ -1,11 +1,9 @@
 <template>
   <div id="app">
     <el-container>
-      <el-aside width="200px" class="h-screen overflow-scroll"
-        ><Aside />
-      </el-aside>
-      <el-main class="p-0 h-screen border border-gray-100 overflow-scroll"
-        ><Schedule />
+      <el-aside width="300px" class="h-screen"><Aside /> </el-aside>
+      <el-main class="p-0 h-screen border border-gray-100 overflow-scroll">
+        <Schedule />
       </el-main>
     </el-container>
   </div>

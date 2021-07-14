@@ -3,6 +3,7 @@
     <div
       class="
         timeline-block__month
+        text-sm
         flex
         justify-center
         items-center
@@ -36,11 +37,15 @@ export default {
       type: Object,
       required: true,
     },
+    width: {
+      type: Number,
+      required: true,
+    },
   },
   computed: {
     bottomBlockStyle() {
       return {
-        gridTemplateColumns: `repeat(${this.block.cells.length})`,
+        gridTemplateColumns: `repeat(${this.block.cells.length}, ${this.width}px)`,
       };
     },
   },
@@ -52,9 +57,6 @@ export default {
       };
     },
   },
-  created() {
-    console.log({ block: this.block });
-  },
 };
 </script>
 
@@ -62,13 +64,18 @@ export default {
 .timeline-block {
   height: 100%;
   background-color: #feca57;
-  border-left: 1px solid #8395a7;
   border-bottom: 1px solid #8395a7;
   display: grid;
   grid-auto-rows: 35% 65%;
 }
 
+.timeline-block:last-child {
+  border-right: 1px solid #8395a7;
+}
+
 .timeline-block__month {
+  border-left: 1px solid #8395a7;
+  border-bottom: 1px solid #8395a7;
   grid-row: 1 / 2;
 }
 

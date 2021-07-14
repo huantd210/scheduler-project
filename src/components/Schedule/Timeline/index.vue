@@ -3,8 +3,15 @@
     <Block
       v-for="(item, index) in getBlocks"
       :key="item.id"
+      :width="width"
       :block="item"
-      :style="blockStyle(index)"
+      :style="
+        blockStyle(
+          { x: index + 1, y: index + 2 },
+          { x: 1, y: 2 },
+          item.cells.length
+        )
+      "
     ></Block>
   </div>
 </template>
@@ -27,11 +34,14 @@ export default {
       type: Number,
       required: true,
     },
+    width: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
       height: 120,
-      // width: 200, // width of block
     };
   },
   computed: {
@@ -59,9 +69,11 @@ export default {
     },
   },
   methods: {
-    blockStyle(index) {
+    blockStyle(column = { x: 1, y: 2 }, row = { x: 1, y: 2 }, cells) {
       return {
-        gridColumns: index + 1 + "/" + index + 2,
+        gridColumn: `${column.x} / ${column.y}`,
+        gridRow: `${row.x} / ${row.y}`,
+        width: `${this.width * cells}px`,
       };
     },
     getCells(month, year) {
@@ -89,8 +101,10 @@ export default {
 
 <style scoped>
 .schedule-timeline {
+  /* height: 120px; height timeline */
   height: 100%;
   width: 100%;
+  /* position: fixed; */
   display: grid;
 }
 </style>

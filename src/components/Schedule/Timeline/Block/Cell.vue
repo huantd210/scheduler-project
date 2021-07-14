@@ -1,7 +1,7 @@
 <template>
   <div class="timeline-block__cell overflow-hidden">
-    <div class="cell-day">{{ cell.day }}</div>
-    <div class="cell-th">{{ getCellTh }}</div>
+    <div class="cell-day text-sm">{{ cell.day }}</div>
+    <div class="cell-th text-sm">{{ getCellTh }}</div>
   </div>
 </template>
 
@@ -24,16 +24,10 @@ export default {
 
 <style scoped>
 .timeline-block__cell {
-  width: 35px; /* width of cell */
   height: 100%;
   border-left: 1px solid #8395a7;
-  border-top: 1px solid #8395a7;
   display: grid;
   grid-auto-rows: 50% 50%;
-}
-
-.timeline-block__cell:nth-child(1) {
-  border-left-width: 0;
 }
 
 .cell-day,

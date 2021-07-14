@@ -1,34 +1,51 @@
 <template>
-  <div class="schedule-gird"></div>
+  <div class="schedule-gird">
+    <Process
+      v-for="(item, index) in getProjects"
+      :key="`pr-${index}`"
+      :project="item"
+      :width="width"
+      :height="height"
+    />
+  </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { PROJECT_GET_LIST } from "../../../store/constants/actionTypes";
+import Process from "./Process/index.vue";
+
 export default {
   name: "schedule-gird",
-  components: {},
-  computed: {},
-  methods: {},
+  components: {
+    Process,
+  },
   props: {
-    start: {
+    width: {
       type: Number,
       required: true,
     },
-    end: {
+    height: {
       type: Number,
       required: true,
     },
   },
-  data() {
-    return {
-      height: 70, // width of cell
-      width: 35, // width of cell
-    };
+  computed: {
+    ...mapGetters("project", ["getProjects"]),
+  },
+  async created() {
+    try {
+      await this.$store.dispatch(`project/${PROJECT_GET_LIST}`);
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>
 
 <style scoped>
 .schedule-gird {
-  display: grid;
+  height: 100%;
+  width: 100%;
 }
 </style>
