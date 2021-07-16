@@ -1,10 +1,17 @@
 <template>
-  <div class="schedule">
-    <Timeline ref="scheduleTimeline" :start="start" :end="end" :width="width" />
-    <Grid ref="scheduleGrid" :width="width" :height="height" />
+  <div class="schedule" :style="scheduleStyle">
+    <Timeline ref="scheduleTimeline" />
+    <Grid
+      ref="scheduleGrid"
+      :start="start"
+      :end="end"
+      :width="width"
+      :height="height"
+    />
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import Timeline from "./Timeline/index.vue";
 import Grid from "./Grid/index.vue";
 
@@ -19,9 +26,19 @@ export default {
       start: 1,
       end: 12, // 12 months
       // slice: 4, // 4 weeks
-      width: 25,
-      height: 45, // default
+      width: 35,
+      height: 35, // default
     };
+  },
+  computed: {
+    ...mapGetters("config", ["getConfig"]),
+    scheduleStyle() {
+      const { height } = this.getConfig;
+
+      return {
+        gridTemplateRows: `${height * 3}px calc(100vh - ${height * 3}px)`,
+      };
+    },
   },
 };
 </script>
@@ -32,6 +49,5 @@ export default {
   overflow: hidden;
   overflow-x: scroll;
   display: grid;
-  grid-template-rows: 120px calc(100vh - 120px);
 }
 </style>

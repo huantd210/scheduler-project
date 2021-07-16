@@ -9,7 +9,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { PROJECT_GET_LIST } from "../../store/constants/actionTypes";
+import { PROJECT_GET_LIST } from "../../constants/actionTypes";
 import Project from "./Project.vue";
 
 export default {

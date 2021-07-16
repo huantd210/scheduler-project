@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Cell from "./Cell";
 
 export default {
@@ -37,15 +38,14 @@ export default {
       type: Object,
       required: true,
     },
-    width: {
-      type: Number,
-      required: true,
-    },
   },
   computed: {
+    ...mapGetters("config", ["getConfig"]),
     bottomBlockStyle() {
+      const { width } = this.getConfig;
+
       return {
-        gridTemplateColumns: `repeat(${this.block.cells.length}, ${this.width}px)`,
+        gridTemplateColumns: `repeat(${this.block.cells.length}, ${width}px)`,
       };
     },
   },
@@ -64,18 +64,18 @@ export default {
 .timeline-block {
   height: 100%;
   background-color: #feca57;
-  border-bottom: 1px solid #8395a7;
+  border-bottom: 1px solid #8395a769;
   display: grid;
   grid-auto-rows: 35% 65%;
 }
 
 .timeline-block:last-child {
-  border-right: 1px solid #8395a7;
+  border-right: 1px solid #8395a769;
 }
 
 .timeline-block__month {
-  border-left: 1px solid #8395a7;
-  border-bottom: 1px solid #8395a7;
+  border-left: 1px solid #8395a769;
+  border-bottom: 1px solid #8395a769;
   grid-row: 1 / 2;
 }
 

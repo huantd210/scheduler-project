@@ -2,12 +2,11 @@
   <div
     class="
       process__project
-      h-4/5
+      h-full
       flex
       justify-center
       items-center
       bg-transparent
-      rounded
       cursor-pointer
       text-sm
       overflow-hidden
@@ -64,10 +63,12 @@ export default {
 .process__project--dev {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+  height: 100%;
 }
 
 .process__project--guar {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
+  height: 100%;
 }
 </style>

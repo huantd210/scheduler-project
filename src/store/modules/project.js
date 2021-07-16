@@ -1,4 +1,4 @@
-import { PROJECT_GET_LIST } from "../constants/actionTypes";
+import { PROJECT_GET_LIST } from "../../constants/actionTypes";
 
 export default {
   namespaced: true,

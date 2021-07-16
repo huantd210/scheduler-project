@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import moment from "moment";
 import { getDaysInYear } from "../../../../utils";
 import CellEmpty from "./Cell";
@@ -33,21 +34,16 @@ export default {
       type: Object,
       required: true,
     },
-    width: {
-      type: Number,
-      required: true,
-    },
-    height: {
-      type: Number,
-      required: true,
-    },
   },
   computed: {
+    ...mapGetters("config", ["getConfig"]),
     processStyle() {
+      const { width, height } = this.getConfig;
+
       return {
-        gridTemplateColumns: `repeat(${this.getEmptyCells}, ${this.width}px)`,
-        gridTemplateRows: `repeat(1, ${this.height}px)`,
-        width: `${this.width * this.getEmptyCells}px`,
+        gridTemplateColumns: `repeat(${this.getEmptyCells}, ${width}px)`,
+        gridTemplateRows: `repeat(1, ${height}px)`,
+        width: `${width * this.getEmptyCells}px`,
       };
     },
     projectStyle() {
@@ -68,7 +64,6 @@ export default {
 
         const devDays = timeEnd.diff(timeStart, "days") + 1;
         const percentDevTime = (devDays / (devDays + guarantee)) * 100; // ex: 25.5
-        console.log({ devDays, guarantee, percentDevTime });
 
         gridTemplateColumns = `${percentDevTime}% ${100 - percentDevTime}%`;
       }
@@ -98,8 +93,8 @@ export default {
 <style scoped>
 .grid-process {
   background-color: #fff;
-  border-bottom: 1px solid #8395a7;
-  border-right: 1px solid #8395a7;
+  border-bottom: 1px solid #8395a769;
+  border-right: 1px solid #8395a769;
   display: grid;
   grid-row: 1 / 2;
   align-items: center;

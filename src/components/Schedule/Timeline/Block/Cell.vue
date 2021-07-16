@@ -25,7 +25,7 @@ export default {
 <style scoped>
 .timeline-block__cell {
   height: 100%;
-  border-left: 1px solid #8395a7;
+  border-left: 1px solid #8395a769;
   display: grid;
   grid-auto-rows: 50% 50%;
 }
@@ -40,7 +40,7 @@ export default {
 
 .cell-day {
   grid-row: 1 / 2;
-  border-bottom: 1px solid #8395a7;
+  border-bottom: 1px solid #8395a769;
 }
 
 .cell-th {

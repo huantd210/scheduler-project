@@ -11,6 +11,6 @@ export default {
 <style scoped>
 .process__cell--empty {
   height: 100%;
-  border-left: 1px solid #8395a7;
+  border-left: 1px solid #8395a769;
 }
 </style>

@@ -3,7 +3,6 @@
     <Block
       v-for="(item, index) in getBlocks"
       :key="item.id"
-      :width="width"
       :block="item"
       :style="
         blockStyle(
@@ -17,6 +16,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import moment from "moment";
 import Block from "./Block/index.vue";
 
@@ -25,30 +25,13 @@ export default {
   components: {
     Block,
   },
-  props: {
-    start: {
-      type: Number,
-      required: true,
-    },
-    end: {
-      type: Number,
-      required: true,
-    },
-    width: {
-      type: Number,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      height: 120,
-    };
-  },
   computed: {
+    ...mapGetters("config", ["getConfig"]),
     getBlocks() {
+      const { start, end } = this.getConfig;
       let blocks = [];
 
-      for (let i = this.start; i <= this.end; i++) {
+      for (let i = start; i <= end; i++) {
         const item = {
           month: i,
           cells: this.getCells(i, 2021),
@@ -59,21 +42,25 @@ export default {
       return blocks;
     },
     timelineStyle() {
+      const { start, end, height } = this.getConfig;
+
       return {
         gridTemplateColumns: `repeat(
-          ${this.end - this.start + 1},
+          ${end - start + 1},
           auto
         )`,
-        gridTemplateRows: `repeat(1, ${this.height}px)`,
+        gridTemplateRows: `repeat(1, ${height * 3}px)`,
       };
     },
   },
   methods: {
     blockStyle(column = { x: 1, y: 2 }, row = { x: 1, y: 2 }, cells) {
+      const { width } = this.getConfig;
+
       return {
         gridColumn: `${column.x} / ${column.y}`,
         gridRow: `${row.x} / ${row.y}`,
-        width: `${this.width * cells}px`,
+        width: `${width * cells}px`,
       };
     },
     getCells(month, year) {

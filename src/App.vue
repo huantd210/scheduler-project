@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-aside width="300px" class="h-screen"><Aside /> </el-aside>
+      <el-aside width="200px" class="h-screen text-center">Menu</el-aside>
       <el-main class="p-0 h-screen border border-gray-100 overflow-hidden">
         <Schedule />
       </el-main>
@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import Aside from "./components/Aside/index.vue";
+// import Aside from "./components/Aside/index.vue";
 import Schedule from "./components/Schedule/index.vue";
 
 export default {
   name: "App",
   components: {
-    Aside,
+    // Aside,
     Schedule,
   },
 };
