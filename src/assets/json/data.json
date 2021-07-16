@@ -6,7 +6,7 @@
             "timeStart": "2021-01-01",
             "timeEnd": "2021-07-01",
             "guarantee": 45,
-            "type": "Đàm phán"
+            "status": "Đàm phán"
         },
         {
             "id": "id-2",
@@ -14,7 +14,7 @@
             "timeStart": "2021-03-01",
             "timeEnd": "2021-08-01",
             "guarantee": 45,
-            "type": "Đã đàm phán"
+            "status": "Đã đàm phán"
         },
         {
             "id": "id-3",
@@ -22,15 +22,15 @@
             "timeStart": "2021-06-01",
             "timeEnd": "2021-09-01",
             "guarantee": 45,
-            "type": "Bắt đầu"
+            "status": "Bắt đầu"
         },
         {
             "id": "id-4",
             "name": "SNAVI 4",
             "timeStart": "2021-03-01",
             "timeEnd": "2021-06-01",
-            "guarantee": 45,
-            "type": "Kết thúc"
+            "guarantee": 5,
+            "status": "Kết thúc"
         },
         {
             "id": "id-5",
@@ -38,7 +38,7 @@
             "timeStart": "2021-01-01",
             "timeEnd": "2021-07-01",
             "guarantee": 45,
-            "type": "Đàm phán"
+            "status": "Đàm phán"
         },
         {
             "id": "id-6",
@@ -46,7 +46,7 @@
             "timeStart": "2021-03-01",
             "timeEnd": "2021-08-01",
             "guarantee": 45,
-            "type": "Đã đàm phán"
+            "status": "Đã đàm phán"
         },
         {
             "id": "id-7",
@@ -54,7 +54,7 @@
             "timeStart": "2021-06-01",
             "timeEnd": "2021-09-01",
             "guarantee": 45,
-            "type": "Bắt đầu"
+            "status": "Bắt đầu"
         },
         {
             "id": "id-8",
@@ -62,7 +62,7 @@
             "timeStart": "2021-03-01",
             "timeEnd": "2021-06-01",
             "guarantee": 45,
-            "type": "Kết thúc"
+            "status": "Kết thúc"
         },
         {
             "id": "id-9",
@@ -70,7 +70,7 @@
             "timeStart": "2021-01-01",
             "timeEnd": "2021-07-01",
             "guarantee": 45,
-            "type": "Đàm phán"
+            "status": "Đàm phán"
         },
         {
             "id": "id-10",
@@ -78,7 +78,7 @@
             "timeStart": "2021-03-01",
             "timeEnd": "2021-08-01",
             "guarantee": 45,
-            "type": "Đã đàm phán"
+            "status": "Đã đàm phán"
         },
         {
             "id": "id-11",
@@ -86,7 +86,7 @@
             "timeStart": "2021-06-01",
             "timeEnd": "2021-09-01",
             "guarantee": 45,
-            "type": "Bắt đầu"
+            "status": "Bắt đầu"
         },
         {
             "id": "id-12",
@@ -94,7 +94,7 @@
             "timeStart": "2021-03-01",
             "timeEnd": "2021-06-01",
             "guarantee": 45,
-            "type": "Kết thúc"
+            "status": "Kết thúc"
         }
        
     ]

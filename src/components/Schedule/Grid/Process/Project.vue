@@ -2,24 +2,30 @@
   <div
     class="
       process__project
-      text-sm
       h-4/5
       flex
       justify-center
       items-center
+      bg-transparent
       rounded
       cursor-pointer
+      text-sm
       overflow-hidden
     "
-    :class="projectClass"
   >
-    <span> {{ project.name }}</span>
+    <div class="process__project--dev" :class="developmentClass">
+      <span> {{ project.name }}</span>
+    </div>
+    <div
+      v-if="project.status === 'Kết thúc'"
+      class="process__project--guar bg-green-100"
+    >
+      <span> Bảo trì </span>
+    </div>
   </div>
 </template>
 
 <script>
-import moment from "moment";
-
 export default {
   name: "process-project",
   props: {
@@ -29,54 +35,39 @@ export default {
     },
   },
   computed: {
-    projectClass() {
-      let cls = "bg-blue-400";
-      switch (this.project.type) {
+    developmentClass() {
+      let devClass = "bg-blue-400";
+      switch (this.project.status) {
         case "Đàm phán":
-          cls = "bg-red-400";
+          devClass = "bg-red-400";
           break;
 
         case "Đã đàm phán":
-          cls = "bg-green-400";
+          devClass = "bg-green-400";
           break;
 
         case "Bắt đầu":
-          cls = "bg-yellow-400";
+          devClass = "bg-yellow-400";
           break;
 
         default:
           break;
       }
 
-      return cls;
+      return devClass;
     },
-  },
-  projectStyle() {
-    const { timeStart, timeEnd } = this.project;
-
-    const start = moment(timeStart, "YYYY-MM-DD").dayOfYear();
-    const end = moment(timeEnd, "YYYY-MM-DD").dayOfYear() + 1;
-
-    return {
-      gridColumn: `${start} / ${end}`,
-      gridRow: "1 / 2",
-    };
-  },
-  guaranteeStyle() {
-    const { timeEnd, guarantee } = this.project;
-    if (!guarantee) return;
-
-    const timeGuarantee = moment(timeEnd, "YYYY-MM-DD").add(guarantee, "days");
-    const start = moment(timeEnd, "YYYY-MM-DD").dayOfYear();
-    const end = moment(timeGuarantee, "YYYY-MM-DD").dayOfYear() + 1;
-
-    return {
-      gridColumn: `${start} / ${end}`,
-      gridRow: "1 / 2",
-    };
   },
 };
 </script>
 
 <style scoped>
+.process__project--dev {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.process__project--guar {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
 </style>

@@ -51,30 +51,33 @@ export default {
       };
     },
     projectStyle() {
-      const { timeStart, timeEnd } = this.project;
+      const timeStart = moment(this.project?.timeStart, "YYYY-MM-DD");
+      const timeEnd = moment(this.project?.timeEnd, "YYYY-MM-DD");
 
-      const start = moment(timeStart, "YYYY-MM-DD").dayOfYear();
-      const end = moment(timeEnd, "YYYY-MM-DD").dayOfYear() + 1;
+      const start = timeStart.dayOfYear();
+      let end = timeEnd.dayOfYear() + 1;
+      let gridTemplateColumns = "100%";
+
+      if (this.project?.status === "Kết thúc") {
+        const { guarantee = 0 } = this.project;
+        const timeGuarantee = moment(timeEnd, "YYYY-MM-DD").add(
+          guarantee,
+          "days"
+        );
+        end = moment(timeGuarantee, "YYYY-MM-DD").dayOfYear() + 1;
+
+        const devDays = timeEnd.diff(timeStart, "days") + 1;
+        const percentDevTime = (devDays / (devDays + guarantee)) * 100; // ex: 25.5
+        console.log({ devDays, guarantee, percentDevTime });
+
+        gridTemplateColumns = `${percentDevTime}% ${100 - percentDevTime}%`;
+      }
 
       return {
         gridColumn: `${start} / ${end}`,
         gridRow: "1 / 2",
-      };
-    },
-    guaranteeStyle() {
-      const { timeEnd, guarantee } = this.project;
-      if (!guarantee) return;
-
-      const timeGuarantee = moment(timeEnd, "YYYY-MM-DD").add(
-        guarantee,
-        "days"
-      );
-      const start = moment(timeEnd, "YYYY-MM-DD").dayOfYear();
-      const end = moment(timeGuarantee, "YYYY-MM-DD").dayOfYear() + 1;
-
-      return {
-        gridColumn: `${start} / ${end}`,
-        gridRow: "1 / 2",
+        display: "grid",
+        gridTemplateColumns,
       };
     },
     getEmptyCells() {
