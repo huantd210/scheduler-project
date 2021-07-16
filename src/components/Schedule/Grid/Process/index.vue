@@ -97,7 +97,6 @@ export default {
 
 <style scoped>
 .grid-process {
-  height: 100%;
   background-color: #fff;
   border-bottom: 1px solid #8395a7;
   border-right: 1px solid #8395a7;

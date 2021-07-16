@@ -101,10 +101,9 @@ export default {
 
 <style scoped>
 .schedule-timeline {
-  /* height: 120px; height timeline */
   height: 100%;
   width: 100%;
-  /* position: fixed; */
+  grid-row: 1 / 2;
   display: grid;
 }
 </style>

@@ -2,7 +2,7 @@
   <div id="app">
     <el-container>
       <el-aside width="300px" class="h-screen"><Aside /> </el-aside>
-      <el-main class="p-0 h-screen border border-gray-100 overflow-scroll">
+      <el-main class="p-0 h-screen border border-gray-100 overflow-hidden">
         <Schedule />
       </el-main>
     </el-container>

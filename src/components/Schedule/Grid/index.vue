@@ -47,5 +47,7 @@ export default {
 .schedule-gird {
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
+  grid-row: 2 / 3;
 }
 </style>
