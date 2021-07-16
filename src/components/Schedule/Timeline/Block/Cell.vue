@@ -1,11 +1,13 @@
 <template>
   <div class="timeline-block__cell overflow-hidden">
-    <div class="cell-day text-sm">{{ cell.day }}</div>
-    <div class="cell-th text-sm">{{ getCellTh }}</div>
+    <div class="cell-day text-sm" :class="cellClass">{{ cell.day }}</div>
+    <div class="cell-th text-sm" :class="cellClass">{{ getCellTh }}</div>
   </div>
 </template>
 
 <script>
+import { isHoliday } from "../../../../utils";
+
 export default {
   name: "timeline-block-cell",
   props: {
@@ -15,6 +17,17 @@ export default {
     },
   },
   computed: {
+    cellClass() {
+      let cls = "bg-blue-600 process__cell--border";
+      const diw = this.cell?.th;
+
+      // T7 or CN
+      if (diw === 6 || diw === 7 || isHoliday(this.cell.date)) {
+        cls = "bg-gray-300";
+      }
+
+      return cls;
+    },
     getCellTh() {
       return this.cell.th === 7 ? "CN" : `T${this.cell.th + 1}`;
     },

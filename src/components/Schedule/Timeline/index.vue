@@ -28,25 +28,40 @@ export default {
   computed: {
     ...mapGetters("config", ["getConfig"]),
     getBlocks() {
-      const { start, end } = this.getConfig;
+      const { range } = this.getConfig;
+
+      const firstTime = moment(this.getConfig?.firstTime, "YYYY-MM-DD");
+      const startOfMonth = moment(
+        moment(firstTime).startOf("month").format("YYYY-MM-DD")
+      );
       let blocks = [];
 
-      for (let i = start; i <= end; i++) {
+      blocks.push({
+        date: firstTime,
+        cells: this.getCells(firstTime),
+      }); // begin
+
+      for (let i = 1; i < range; i++) {
+        const currentTime = moment(
+          moment(startOfMonth).add(i, "months").format("YYYY-MM-DD")
+        ); // next
+
         const item = {
-          month: i,
-          cells: this.getCells(i, 2021),
+          date: currentTime,
+          cells: this.getCells(currentTime),
         };
 
         blocks.push(item);
       }
+
       return blocks;
     },
     timelineStyle() {
-      const { start, end, height } = this.getConfig;
+      const { range, height } = this.getConfig;
 
       return {
         gridTemplateColumns: `repeat(
-          ${end - start + 1},
+          ${range},
           auto
         )`,
         gridTemplateRows: `repeat(1, ${height * 3}px)`,
@@ -63,18 +78,19 @@ export default {
         width: `${width * cells}px`,
       };
     },
-    getCells(month, year) {
-      const dom = moment(`${year}-${month}`, "YYYY-MM").daysInMonth(); // days of month
+    getCells(currentTime) {
+      const day = currentTime.date(); // day start
+      const month = currentTime.month() + 1;
+      const year = currentTime.year();
+
+      const dom = moment(`${year}-${month}`, "YYYY-MM").daysInMonth(); // days of month (last day in month)
       let cells = [];
 
-      for (let i = 0; i < dom; i++) {
-        const diw = moment(
-          `${year}-${month}-${i + 1}`,
-          "YYYY-MM-DD"
-        ).isoWeekday(); // day in week
+      for (let i = day; i <= dom; i++) {
+        const diw = moment(`${year}-${month}-${i}`, "YYYY-MM-DD").isoWeekday(); // day in week
 
         const item = {
-          day: i + 1,
+          day: i,
           th: diw,
         };
         cells.push(item);

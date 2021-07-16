@@ -1,9 +1,12 @@
 <template>
   <div class="grid-process" :style="processStyle">
     <CellEmpty
-      v-for="index in getEmptyCells"
+      v-for="(item, index) in cells"
       :key="`de-${index}`"
-      :style="getEmptyCellPosition({ x: index, y: index + 1 }, { x: 1, y: 2 })"
+      :cell="item"
+      :style="
+        getEmptyCellPosition({ x: index + 1, y: index + 2 }, { x: 1, y: 2 })
+      "
     />
     <el-tooltip
       class="item"
@@ -19,7 +22,6 @@
 <script>
 import { mapGetters } from "vuex";
 import moment from "moment";
-import { getDaysInYear } from "../../../../utils";
 import CellEmpty from "./Cell";
 import Project from "./Project";
 
@@ -34,6 +36,10 @@ export default {
       type: Object,
       required: true,
     },
+    cells: {
+      type: Array,
+      required: true,
+    },
   },
   computed: {
     ...mapGetters("config", ["getConfig"]),
@@ -41,17 +47,22 @@ export default {
       const { width, height } = this.getConfig;
 
       return {
-        gridTemplateColumns: `repeat(${this.getEmptyCells}, ${width}px)`,
+        gridTemplateColumns: `repeat(${this.cells.length}, ${width}px)`,
         gridTemplateRows: `repeat(1, ${height}px)`,
-        width: `${width * this.getEmptyCells}px`,
+        width: `${width * this.cells.length}px`,
       };
     },
     projectStyle() {
+      const firstTime = moment(this.getConfig?.firstTime, "YYYY-MM-DD");
       const timeStart = moment(this.project?.timeStart, "YYYY-MM-DD");
       const timeEnd = moment(this.project?.timeEnd, "YYYY-MM-DD");
 
-      const start = timeStart.dayOfYear();
-      let end = timeEnd.dayOfYear() + 1;
+      const start = firstTime.isBefore(timeStart)
+        ? timeStart.diff(firstTime, "days") + 1
+        : 1;
+      let end = firstTime.isBefore(timeEnd)
+        ? timeEnd.diff(firstTime, "days") + 1
+        : 1;
       let gridTemplateColumns = "100%";
 
       if (this.project?.status === "Kết thúc") {
@@ -60,7 +71,9 @@ export default {
           guarantee,
           "days"
         );
-        end = moment(timeGuarantee, "YYYY-MM-DD").dayOfYear() + 1;
+        end = firstTime.isBefore(timeGuarantee)
+          ? timeGuarantee.diff(firstTime, "days") + 1
+          : 1;
 
         const devDays = timeEnd.diff(timeStart, "days") + 1;
         const percentDevTime = (devDays / (devDays + guarantee)) * 100; // ex: 25.5
@@ -74,9 +87,6 @@ export default {
         display: "grid",
         gridTemplateColumns,
       };
-    },
-    getEmptyCells() {
-      return getDaysInYear(2021);
     },
   },
   methods: {
@@ -93,7 +103,7 @@ export default {
 <style scoped>
 .grid-process {
   background-color: #fff;
-  border-bottom: 1px solid #8395a769;
+  /* border-bottom: 1px solid #8395a769; */
   border-right: 1px solid #8395a769;
   display: grid;
   grid-row: 1 / 2;

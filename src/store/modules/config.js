@@ -11,9 +11,7 @@ export default {
       config: {
         width: 35,
         height: 35,
-        start: 1,
-        end: 12,
-        begin: "2021-01-01",
+        firstTime: "2021-01-07",
         range: 12, // default 12 months
       },
     };

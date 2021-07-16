@@ -1,13 +1,7 @@
 <template>
   <div class="schedule" :style="scheduleStyle">
     <Timeline ref="scheduleTimeline" />
-    <Grid
-      ref="scheduleGrid"
-      :start="start"
-      :end="end"
-      :width="width"
-      :height="height"
-    />
+    <Grid ref="scheduleGrid" />
   </div>
 </template>
 <script>

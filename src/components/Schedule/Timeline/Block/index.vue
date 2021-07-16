@@ -3,6 +3,7 @@
     <div
       class="
         timeline-block__month
+        bg-blue-600
         text-sm
         flex
         justify-center
@@ -10,7 +11,9 @@
         overflow-hidden
       "
     >
-      <span class="text-white">Tháng {{ block.month }}</span>
+      <span class="text-white"
+        >{{ block.date.month() + 1 }}/{{ block.date.year() }}
+      </span>
     </div>
     <div class="timeline-block__day" :style="bottomBlockStyle">
       <Cell
@@ -63,7 +66,6 @@ export default {
 <style scoped>
 .timeline-block {
   height: 100%;
-  background-color: #feca57;
   border-bottom: 1px solid #8395a769;
   display: grid;
   grid-auto-rows: 35% 65%;
