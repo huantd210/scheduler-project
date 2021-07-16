@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import moment from "moment";
+import { mapGetters } from "vuex";
 import CellEmpty from "./Cell";
 import Project from "./Project";
 
@@ -53,39 +53,30 @@ export default {
       };
     },
     projectStyle() {
+      const { range } = this.getConfig;
       const firstTime = moment(this.getConfig?.firstTime, "YYYY-MM-DD");
-      const timeStart = moment(this.project?.timeStart, "YYYY-MM-DD");
-      const timeEnd = moment(this.project?.timeEnd, "YYYY-MM-DD");
+      const lastTime = moment(
+        moment(firstTime)
+          .add(range - 1, "months")
+          .endOf("month")
+          .format("YYYY-MM-DD")
+      );
+      const timeStartProject = moment(this.project?.timeStart, "YYYY-MM-DD");
+      const timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
 
-      const start = firstTime.isBefore(timeStart)
-        ? timeStart.diff(firstTime, "days") + 1
-        : 1;
-      let end = firstTime.isBefore(timeEnd)
-        ? timeEnd.diff(firstTime, "days") + 1
-        : 1;
-      let gridTemplateColumns = "100%";
+      const timeStartBorder = timeStartProject.isBefore(firstTime)
+        ? firstTime
+        : timeEndProject;
+      const timeEndBorder = timeEndProject.isAfter(lastTime)
+        ? lastTime
+        : timeEndProject;
 
-      if (this.project?.status === "Kết thúc") {
-        const { guarantee = 0 } = this.project;
-        const timeGuarantee = moment(timeEnd, "YYYY-MM-DD").add(
-          guarantee,
-          "days"
-        );
-        end = firstTime.isBefore(timeGuarantee)
-          ? timeGuarantee.diff(firstTime, "days") + 1
-          : 1;
-
-        const devDays = timeEnd.diff(timeStart, "days") + 1;
-        const percentDevTime = (devDays / (devDays + guarantee)) * 100; // ex: 25.5
-
-        gridTemplateColumns = `${percentDevTime}% ${100 - percentDevTime}%`;
-      }
+      const start = timeStartBorder.diff(firstTime, "days") + 1; // ? -> grid
+      const end = timeEndBorder.diff(firstTime, "days") + 2; // ? -> grid
 
       return {
         gridColumn: `${start} / ${end}`,
         gridRow: "1 / 2",
-        display: "grid",
-        gridTemplateColumns,
       };
     },
   },
@@ -110,3 +101,34 @@ export default {
   align-items: center;
 }
 </style>
+
+
+//  let rangeProject = timeEndBorder.diff(timeStartBorder, "days") + 1;
+
+//       if (this.project?.status === "Kết thúc") {
+//         const { guarantee } = this.project;
+//         let timeGuarantee = moment(timeEnd, "YYYY-MM-DD").add(
+//           guarantee,
+//           "days"
+//         );
+
+//         const timeGuaranteeBorder = timeGuarantee.isAfter(lastTime)
+//           ? lastTime
+//           : timeGuarantee;
+
+//         const endDev = end;
+//         end = timeGuaranteeBorder.diff(firstTime, "days") + 2;
+//         rangeProject += range;
+
+//         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+//         this.devStyle = {
+//           gridColumn: `${start} / ${endDev}`,
+//           gridRow: "1 / 2",
+//         };
+
+//         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+//         this.guarStyle = {
+//           gridColumn: `${endDev + 1} / ${end}`,
+//           gridRow: "1 / 2",
+//         };
+//       }

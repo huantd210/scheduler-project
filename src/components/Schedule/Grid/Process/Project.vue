@@ -11,20 +11,15 @@
       text-sm
       overflow-hidden
     "
+    :style="projectColor"
   >
-    <div class="process__project--dev" :class="developmentClass">
-      <span> {{ project.name }}</span>
-    </div>
-    <div
-      v-if="project.status === 'Kết thúc'"
-      class="process__project--guar bg-green-100"
-    >
-      <span> Bảo trì </span>
-    </div>
+    <span> {{ project.name }}</span>
   </div>
 </template>
 
 <script>
+import { COLORS } from "../../../../constants";
+
 export default {
   name: "process-project",
   props: {
@@ -34,41 +29,34 @@ export default {
     },
   },
   computed: {
-    developmentClass() {
-      let devClass = "bg-blue-400";
+    projectColor() {
+      let projectColor = COLORS.development;
       switch (this.project.status) {
         case "Đàm phán":
-          devClass = "bg-red-400";
+          projectColor = COLORS.negotiate;
           break;
 
-        case "Đã đàm phán":
-          devClass = "bg-green-400";
+        case "Đã đàm phán": // "Chưa bắt đầu"
+          projectColor = COLORS.notStartedYet;
           break;
 
-        case "Bắt đầu":
-          devClass = "bg-yellow-400";
+        case "Kết thúc":
+          projectColor = COLORS.finish;
           break;
 
         default:
           break;
       }
 
-      return devClass;
+      return { backgroundColor: projectColor };
     },
   },
 };
 </script>
 
 <style scoped>
-.process__project--dev {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  height: 100%;
-}
-
-.process__project--guar {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
+.process__project {
+  width: 100%;
   height: 100%;
 }
 </style>

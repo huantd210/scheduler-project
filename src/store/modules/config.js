@@ -9,8 +9,8 @@ export default {
   state: () => {
     return {
       config: {
-        width: 35,
-        height: 35,
+        width: 30,
+        height: 30,
         firstTime: "2021-01-07",
         range: 12, // default 12 months
       },
