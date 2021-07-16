@@ -2,23 +2,27 @@
   <div
     class="
       process__project
-      h-full
-      flex
-      justify-center
-      items-center
+      text-sm
       bg-transparent
       cursor-pointer
-      text-sm
       overflow-hidden
     "
-    :style="projectColor"
   >
-    <span> {{ project.name }}</span>
+    <div :style="devColor" class="process__project--dev">
+      {{ project.name }}
+    </div>
+    <div
+      v-if="visiableMainte"
+      :style="mainteColor"
+      class="process__project--mainte"
+    >
+      Bảo trì
+    </div>
   </div>
 </template>
 
 <script>
-import { COLORS } from "../../../../constants";
+import { COLORS, PROJECT_STATUS } from "../../../../constants";
 
 export default {
   name: "process-project",
@@ -29,19 +33,19 @@ export default {
     },
   },
   computed: {
-    projectColor() {
-      let projectColor = COLORS.development;
+    devColor() {
+      let projectColor = COLORS.started;
       switch (this.project.status) {
-        case "Đàm phán":
+        case PROJECT_STATUS.negotiate: // "Đàm phán"
           projectColor = COLORS.negotiate;
           break;
 
-        case "Đã đàm phán": // "Chưa bắt đầu"
+        case PROJECT_STATUS.notStartedYet: // "Chưa bắt đầu"
           projectColor = COLORS.notStartedYet;
           break;
 
-        case "Kết thúc":
-          projectColor = COLORS.finish;
+        case PROJECT_STATUS.finished: // "Kết thúc"
+          projectColor = COLORS.finished;
           break;
 
         default:
@@ -49,6 +53,12 @@ export default {
       }
 
       return { backgroundColor: projectColor };
+    },
+    mainteColor() {
+      return { backgroundColor: COLORS.maintenance };
+    },
+    visiableMainte() {
+      return this.project.status === PROJECT_STATUS.finished;
     },
   },
 };
@@ -58,5 +68,26 @@ export default {
 .process__project {
   width: 100%;
   height: 100%;
+  display: grid;
+}
+
+.process__project--dev,
+.process__project--mainte {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.process__project--dev {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.process__project--mainte {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
 }
 </style>

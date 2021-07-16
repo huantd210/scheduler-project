@@ -9,10 +9,10 @@
       "
     />
     <el-tooltip
-      class="item"
       effect="light"
       content="Thông tin dự án"
-      placement="top"
+      placement="right-start"
+      :popper-options="{ boundariesElement: 'viewport', removeOnDestroy: true }"
     >
       <Project :style="projectStyle" :project="project" />
     </el-tooltip>
@@ -22,6 +22,7 @@
 <script>
 import moment from "moment";
 import { mapGetters } from "vuex";
+import { PROJECT_STATUS } from "../../../../constants";
 import CellEmpty from "./Cell";
 import Project from "./Project";
 
@@ -42,7 +43,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("config", ["getConfig"]),
+    ...mapGetters("config", ["getConfig", "getFirstTime", "getLastTime"]),
     processStyle() {
       const { width, height } = this.getConfig;
 
@@ -53,31 +54,61 @@ export default {
       };
     },
     projectStyle() {
-      const { range } = this.getConfig;
-      const firstTime = moment(this.getConfig?.firstTime, "YYYY-MM-DD");
-      const lastTime = moment(
-        moment(firstTime)
-          .add(range - 1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD")
-      );
-      const timeStartProject = moment(this.project?.timeStart, "YYYY-MM-DD");
+      const { width } = this.getConfig;
+      const firstTime = this.getFirstTime;
       const timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
+      const start = this.timeStartBorder.diff(firstTime, "days") + 1; // ? -> grid
+      const end = this.timeEndBorder.diff(firstTime, "days") + 2; // ? -> grid
 
-      const timeStartBorder = timeStartProject.isBefore(firstTime)
-        ? firstTime
-        : timeEndProject;
-      const timeEndBorder = timeEndProject.isAfter(lastTime)
-        ? lastTime
-        : timeEndProject;
+      const rangeProject = end - start; // including maintenance time if any // unit day
+      let gtColStyle = `${rangeProject * width}px 0px`; // default
 
-      const start = timeStartBorder.diff(firstTime, "days") + 1; // ? -> grid
-      const end = timeEndBorder.diff(firstTime, "days") + 2; // ? -> grid
+      // visiable maintenance
+      if (
+        this.project.status === PROJECT_STATUS.finished &&
+        timeEndProject.isBefore(this.timeEndBorder)
+      ) {
+        const rangeMainteProject = this.timeEndBorder.diff(
+          timeEndProject,
+          "days"
+        );
+        gtColStyle = `${(rangeProject - rangeMainteProject) * width}px ${
+          rangeMainteProject * width
+        }px`;
+      }
 
       return {
         gridColumn: `${start} / ${end}`,
         gridRow: "1 / 2",
+        width: `${width * rangeProject}px`,
+        gridTemplateColumns: gtColStyle,
       };
+    },
+    timeStartBorder() {
+      const firstTime = this.getFirstTime;
+      const timeStartProject = moment(this.project?.timeStart, "YYYY-MM-DD");
+
+      return timeStartProject.isBefore(firstTime)
+        ? firstTime
+        : timeStartProject;
+    },
+    timeEndBorder() {
+      /* including maintenance time if any */
+      const lastTime = this.getLastTime;
+      const timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
+
+      if (timeEndProject.isAfter(lastTime)) return lastTime;
+      if (this.project?.status !== PROJECT_STATUS.finished /* not "Kết thúc" */)
+        return timeEndProject.isAfter(lastTime) ? lastTime : timeEndProject;
+
+      const timeMaintenanceProject = moment(timeEndProject).add(
+        this.project?.guarantee,
+        "days"
+      );
+
+      if (timeMaintenanceProject.isAfter(lastTime)) return lastTime;
+
+      return timeMaintenanceProject;
     },
   },
   methods: {
@@ -102,33 +133,3 @@ export default {
 }
 </style>
 
-
-//  let rangeProject = timeEndBorder.diff(timeStartBorder, "days") + 1;
-
-//       if (this.project?.status === "Kết thúc") {
-//         const { guarantee } = this.project;
-//         let timeGuarantee = moment(timeEnd, "YYYY-MM-DD").add(
-//           guarantee,
-//           "days"
-//         );
-
-//         const timeGuaranteeBorder = timeGuarantee.isAfter(lastTime)
-//           ? lastTime
-//           : timeGuarantee;
-
-//         const endDev = end;
-//         end = timeGuaranteeBorder.diff(firstTime, "days") + 2;
-//         rangeProject += range;
-
-//         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-//         this.devStyle = {
-//           gridColumn: `${start} / ${endDev}`,
-//           gridRow: "1 / 2",
-//         };
-
-//         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-//         this.guarStyle = {
-//           gridColumn: `${endDev + 1} / ${end}`,
-//           gridRow: "1 / 2",
-//         };
-//       }

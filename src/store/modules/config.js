@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   SCHEDULE_SET_TIME,
   SCHEDULE_SET_SIZE,
@@ -18,6 +19,11 @@ export default {
   },
   getters: {
     getConfig: (state) => state.config,
+    getFirstTime: (state) => moment(state.config?.firstTime, "YYYY-MM-DD"),
+    getLastTime: (state) =>
+      moment(state.config?.firstTime, "YYYY-MM-DD")
+        .add(state.config?.range - 1, "months")
+        .endOf("month"),
   },
   mutations: {
     [SCHEDULE_SET_TIME](state, payload) {

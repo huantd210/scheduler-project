@@ -22,7 +22,7 @@ export default {
           const { projects } = await new Promise((resolve) => {
             const json = require("../../assets/json/data.json");
 
-            setTimeout(() => resolve(json), 3000);
+            setTimeout(() => resolve(json), 0);
           });
 
           context.commit(PROJECT_GET_LIST, {

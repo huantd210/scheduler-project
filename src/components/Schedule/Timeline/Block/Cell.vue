@@ -1,11 +1,16 @@
 <template>
   <div class="timeline-block__cell overflow-hidden">
-    <div class="cell-day text-sm" :class="cellClass">{{ cell.day }}</div>
-    <div class="cell-th text-sm" :class="cellClass">{{ getCellTh }}</div>
+    <div class="cell-day text-sm" :class="cellClass">
+      {{ cell.date.date() }}
+    </div>
+    <div class="cell-th text-sm" :class="cellClass">
+      {{ getDayInWeek === 7 ? "CN" : `T${getDayInWeek + 1}` }}
+    </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 import { isHoliday } from "../../../../utils";
 
 export default {
@@ -19,17 +24,20 @@ export default {
   computed: {
     cellClass() {
       let cls = "bg-blue-600 process__cell--border";
-      const diw = this.cell?.th;
 
       // T7 or CN
-      if (diw === 6 || diw === 7 || isHoliday(this.cell.date)) {
+      if (
+        this.getDayInWeek === 6 ||
+        this.getDayInWeek === 7 ||
+        isHoliday(this.cell.date)
+      ) {
         cls = "bg-gray-300";
       }
 
       return cls;
     },
-    getCellTh() {
-      return this.cell.th === 7 ? "CN" : `T${this.cell.th + 1}`;
+    getDayInWeek() {
+      return moment(this.cell.date).isoWeekday();
     },
   },
 };

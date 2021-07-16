@@ -87,11 +87,8 @@ export default {
       let cells = [];
 
       for (let i = day; i <= dom; i++) {
-        const diw = moment(`${year}-${month}-${i}`, "YYYY-MM-DD").isoWeekday(); // day in week
-
         const item = {
-          day: i,
-          th: diw,
+          date: moment(`${year}-${month}-${i}`, "YYYY-MM-DD"),
         };
         cells.push(item);
       }
