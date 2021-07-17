@@ -75,6 +75,7 @@ export default {
   height: 100%;
   width: 100%;
   /* border-bottom: 1px solid #fff; */
+  border-left: 1px solid #d1ccc0;
   display: grid;
 }
 
@@ -83,8 +84,7 @@ export default {
 }
 
 .timeline-block__month {
-  /* border-left: 1px solid #d1ccc0; */
-  /* border-bottom: 1px solid #d1ccc0; */
+  border-bottom: 1px solid #d1ccc0;
   height: 100%;
   width: 100%;
   grid-row: 1 / 2;

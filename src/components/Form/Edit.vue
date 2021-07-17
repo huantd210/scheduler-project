@@ -1,11 +1,13 @@
 <template>
   <el-dialog
-    title="Chỉnh sửa dự án"
-    :visible.sync="visible"
+    ref="dialogFormEdit"
+    title="Thông tin dự án"
+    :visible.sync="visibleSync"
     :show-close="false"
-    top="15vh"
+    @open="onOpen"
+    @close="onClose"
   >
-    <el-form ref="form" :model="form" :rules="rules" label-position="top">
+    <el-form ref="formEdit" :model="form" :rules="rules" label-position="top">
       <el-form-item label="Tên dự án" prop="name" required>
         <el-input
           v-model="form.name"
@@ -67,19 +69,19 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button size="small" @click="visible = false">Hủy bỏ</el-button>
-      <el-button size="small" type="primary" @click="visible = false"
-        >Lưu lại</el-button
-      >
+      <el-button size="small" @click="visibleSync = false">Hủy bỏ</el-button>
+      <el-button type="primary" size="small" @click="onSave">Lưu lại</el-button>
     </span>
   </el-dialog>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import { PROJECT_SELECTED, PROJECT_EDIT } from "../../constants/actionTypes";
+
 export default {
   name: "form-edit",
   data() {
     return {
-      visible: false,
       optionsStatus: [
         { label: "Đàm phán", value: "Đàm phán" },
         { label: "Đã đàm phán (Chưa bắt đầu)", value: "Chưa bắt đầu" },
@@ -132,8 +134,38 @@ export default {
       },
     };
   },
-  computed: {},
-  methods: {},
+  computed: {
+    ...mapGetters("project", ["getProjectSelected"]),
+    visibleSync: {
+      get() {
+        return (
+          !!this.getProjectSelected &&
+          Object.keys(this.getProjectSelected).length > 0
+        );
+      },
+      set(value) {
+        if (!value) {
+          this.$store.dispatch(`project/${PROJECT_SELECTED}`, {
+            project: "",
+          });
+        }
+      },
+    },
+  },
+  methods: {
+    onOpen() {
+      this.form = { ...this.getProjectSelected };
+    },
+    onSave() {
+      this.$store.dispatch(`project/${PROJECT_EDIT}`, {
+        project: { ...this.form },
+      });
+      this.visibleSync = false;
+    },
+    onClose() {
+      this.$refs.formEdit.resetFields();
+    },
+  },
 };
 </script>
 <style scoped>

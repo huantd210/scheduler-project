@@ -8,16 +8,12 @@
       overflow-hidden
     "
   >
-    <div :style="devColor" class="process__project--dev">
-      {{ project.name }}
-    </div>
+    <div :style="devColor" class="process__project--dev"></div>
     <div
       v-if="visiableMainte"
       :style="mainteColor"
       class="process__project--mainte"
-    >
-      Bảo trì
-    </div>
+    ></div>
   </div>
 </template>
 

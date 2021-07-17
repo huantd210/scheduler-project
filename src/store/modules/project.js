@@ -2,6 +2,7 @@ import {
   PROJECT_GET_LIST,
   PROJECT_CREATE,
   PROJECT_EDIT,
+  PROJECT_SELECTED,
 } from "../../constants/actionTypes";
 // import { filterProjects } from "../../utils";
 
@@ -10,10 +11,12 @@ export default {
   state: () => {
     return {
       projects: [],
+      projectSelected: "",
     };
   },
   getters: {
     getProjects: (state) => state.projects,
+    getProjectSelected: (state) => state.projectSelected,
   },
   mutations: {
     [PROJECT_GET_LIST](state, payload) {
@@ -27,6 +30,10 @@ export default {
       state.projects = state.projects.map((it) =>
         it.id !== payload?.project?.id ? it : payload?.project
       );
+    },
+    [PROJECT_SELECTED](state, payload) {
+      state.projectSelected = payload?.project;
+      console.log(state.projectSelected);
     },
   },
   actions: {
@@ -57,6 +64,9 @@ export default {
     },
     [PROJECT_EDIT](context, payload) {
       context.commit(PROJECT_EDIT, payload);
+    },
+    [PROJECT_SELECTED](context, payload) {
+      context.commit(PROJECT_SELECTED, payload);
     },
   },
 };

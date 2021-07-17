@@ -1,10 +1,5 @@
 <template>
-  <el-dialog
-    top="15vh"
-    title="Dự án mới"
-    :visible.sync="visibleSync"
-    :show-close="false"
-  >
+  <el-dialog title="Dự án mới" :visible.sync="visibleSync" :show-close="false">
     <el-form ref="formCreate" :model="form" :rules="rules" label-position="top">
       <el-form-item label="Tên dự án" prop="name" required>
         <el-input

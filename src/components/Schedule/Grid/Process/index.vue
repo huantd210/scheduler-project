@@ -1,46 +1,48 @@
 <template>
-  <div class="grid-process" :style="processStyle">
-    <CellEmpty
-      v-for="(item, index) in cells"
-      :key="`de-${index}`"
-      :cell="item"
-      :style="
-        getEmptyCellPosition({ x: index + 1, y: index + 2 }, { x: 1, y: 2 })
-      "
-    />
-    <el-tooltip
-      effect="light"
-      placement="right-start"
-      :popper-options="{ boundariesElement: 'viewport', removeOnDestroy: true }"
-    >
-      <div slot="content" class="space-y-2">
-        <span class="block">
-          Tên dự án:
-          <strong> {{ project.name }} </strong>
-        </span>
-        <span class="block">
-          Trạng thái:
-          <strong> {{ project.status }} </strong>
-        </span>
-        <span class="block">
-          Ngày bắt đầu:
-          <strong>
-            {{ timeStartProjectFormat }}
-          </strong>
-        </span>
-        <span class="block">
-          Ngày kết thúc:
-          <strong> {{ timeEndProjectFormat }} </strong>
-        </span>
-      </div>
+  <el-tooltip
+    effect="light"
+    placement="right-start"
+    :popper-options="{ boundariesElement: 'viewport', removeOnDestroy: true }"
+  >
+    <div slot="content" class="space-y-2">
+      <span class="block">
+        Tên dự án:
+        <strong> {{ project.name }} </strong>
+      </span>
+      <span class="block">
+        Trạng thái:
+        <strong> {{ project.status }} </strong>
+      </span>
+      <span class="block">
+        Ngày bắt đầu:
+        <strong>
+          {{ timeStartProjectFormat }}
+        </strong>
+      </span>
+      <span class="block">
+        Ngày kết thúc:
+        <strong> {{ timeEndProjectFormat }} </strong>
+      </span>
+    </div>
+    <div class="grid-process" :style="processStyle" @dblclick="onSelectProject">
+      <CellEmpty
+        v-for="(item, index) in cells"
+        :key="`de-${index}`"
+        :cell="item"
+        :style="
+          getEmptyCellPosition({ x: index + 1, y: index + 2 }, { x: 1, y: 2 })
+        "
+      />
+
       <Project :style="projectStyle" :project="project" />
-    </el-tooltip>
-  </div>
+    </div>
+  </el-tooltip>
 </template>
 
 <script>
 import moment from "moment";
 import { mapGetters } from "vuex";
+import { PROJECT_SELECTED } from "../../../../constants/actionTypes";
 import { PROJECT_STATUS } from "../../../../constants";
 import CellEmpty from "./Cell";
 import Project from "./Project";
@@ -143,6 +145,13 @@ export default {
         gridRow: `${row.x} / ${row.y}`,
       };
     },
+    onSelectProject() {
+      this.$store.dispatch(`project/${PROJECT_SELECTED}`, {
+        project: {
+          ...this.project,
+        },
+      });
+    },
   },
 };
 </script>
@@ -150,7 +159,7 @@ export default {
 <style scoped>
 .grid-process {
   background-color: #d1ccc0;
-  /* border-bottom: 1px solid #fff; */
+  border-bottom: 1px solid #222f3e4a;
   /* border-right: 1px solid #fff; */
   display: grid;
   grid-row: 1 / 2;
