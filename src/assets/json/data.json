@@ -95,6 +95,70 @@
       "timeEnd": "2021-06-01",
       "guarantee": 45,
       "status": "Kết thúc"
+    },
+    {
+      "id": "id-13",
+      "name": "SNAVI",
+      "timeStart": "2021-01-01",
+      "timeEnd": "2021-07-01",
+      "guarantee": 45,
+      "status": "Đàm phán"
+    },
+    {
+      "id": "id-14",
+      "name": "SNAVI 2",
+      "timeStart": "2021-03-01",
+      "timeEnd": "2021-08-01",
+      "guarantee": 45,
+      "status": "Chưa bắt đầu"
+    },
+    {
+      "id": "id-15",
+      "name": "SNAVI 3",
+      "timeStart": "2021-06-01",
+      "timeEnd": "2021-09-01",
+      "guarantee": 45,
+      "status": "Bắt đầu"
+    },
+    {
+      "id": "id-16",
+      "name": "SNAVI 4",
+      "timeStart": "2021-03-01",
+      "timeEnd": "2021-06-01",
+      "guarantee": 5,
+      "status": "Kết thúc"
+    },
+    {
+      "id": "id-17",
+      "name": "SNAVI",
+      "timeStart": "2021-01-01",
+      "timeEnd": "2021-07-01",
+      "guarantee": 45,
+      "status": "Đàm phán"
+    },
+    {
+      "id": "id-18",
+      "name": "SNAVI 3",
+      "timeStart": "2021-06-01",
+      "timeEnd": "2021-09-01",
+      "guarantee": 45,
+      "status": "Bắt đầu"
+    },
+    {
+      "id": "id-19",
+      "name": "SNAVI 4",
+      "timeStart": "2021-03-01",
+      "timeEnd": "2021-06-01",
+      "guarantee": 45,
+      "status": "Kết thúc"
+    },
+    {
+      "id": "id-20",
+      "name": "SNAVI",
+      "timeStart": "2021-01-01",
+      "timeEnd": "2021-07-01",
+      "guarantee": 45,
+      "status": "Đàm phán"
     }
   ]
 }

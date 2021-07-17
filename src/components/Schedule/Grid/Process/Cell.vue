@@ -20,7 +20,7 @@ export default {
 
       // T7 or CN
       if (diw === 6 || diw === 7 || isHoliday(this.cell.date)) {
-        cls = "bg-gray-300";
+        cls = "process__cell--gray";
       }
 
       return cls;
@@ -31,12 +31,14 @@ export default {
 
 <style scoped>
 .process__cell--empty {
+  background-color: #fff;
   height: 100%;
+  width: 100%;
 }
 
-.process__cell--border {
+.process__cell--gray {
+  background-color: #d1ccc0;
   height: 100%;
-  border-bottom: 1px solid #8395a769;
-  border-left: 1px solid #8395a769;
+  width: 100%;
 }
 </style>

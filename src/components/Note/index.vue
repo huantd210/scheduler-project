@@ -1,12 +1,12 @@
 <template>
-  <div class="note inline-flex space-x-4">
+  <div class="schedule-note">
     <div
-      class="inline-flex space-x-1 justify-center items-center"
+      class="inline-flex space-x-1 px-2 justify-center items-center"
       v-for="(item, index) in notes"
       :key="`nt-${index}`"
     >
       <div class="square-color" :style="{ backgroundColor: item.color }"></div>
-      <div>{{ item.name }}</div>
+      <div class="text-sm">{{ item.name }}</div>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 import { COLORS } from "../../constants";
 
 export default {
-  name: "note",
+  name: "schedule-note",
   data() {
     return {
       notes: [
@@ -33,6 +33,10 @@ export default {
         {
           name: "Kết thúc",
           color: COLORS.finished,
+        },
+        {
+          name: "Bảo trì",
+          color: COLORS.maintenance,
         },
       ],
     };

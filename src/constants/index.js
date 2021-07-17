@@ -4,7 +4,7 @@ export const COLORS = {
   negotiate: "#ee5253",
   notStartedYet: "#feca57",
   started: "#78e08f",
-  maintenance: "#F8EFBA",
+  maintenance: "#ffda79",
   finished: "#0abde3",
 };
 

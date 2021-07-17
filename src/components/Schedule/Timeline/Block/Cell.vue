@@ -1,9 +1,9 @@
 <template>
   <div class="timeline-block__cell overflow-hidden">
-    <div class="cell-day text-sm" :class="cellClass">
+    <div class="cell-day text-xs" :class="cellClass">
       {{ cell.date.date() }}
     </div>
-    <div class="cell-th text-sm" :class="cellClass">
+    <div class="cell-th text-xs" :class="cellClass">
       {{ getDayInWeek === 7 ? "CN" : `T${getDayInWeek + 1}` }}
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
         this.getDayInWeek === 7 ||
         isHoliday(this.cell.date)
       ) {
-        cls = "bg-gray-300";
+        cls = "process__cell--gray";
       }
 
       return cls;
@@ -46,9 +46,14 @@ export default {
 <style scoped>
 .timeline-block__cell {
   height: 100%;
-  border-left: 1px solid #8395a769;
+  width: 100%;
+  /* border-left: 1px solid #d1ccc0; */
   display: grid;
   grid-auto-rows: 50% 50%;
+}
+
+.timeline-block__cell:first-child {
+  border-left-width: 0px;
 }
 
 .cell-day,
@@ -61,10 +66,14 @@ export default {
 
 .cell-day {
   grid-row: 1 / 2;
-  border-bottom: 1px solid #8395a769;
+  /* border-bottom: 1px solid #d1ccc0; */
 }
 
 .cell-th {
   grid-row: 2 / 3;
+}
+
+.process__cell--gray {
+  background-color: #d1ccc0;
 }
 </style>

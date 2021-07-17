@@ -2,7 +2,7 @@
   <div
     class="
       process__project
-      text-sm
+      text-xs
       bg-transparent
       cursor-pointer
       overflow-hidden

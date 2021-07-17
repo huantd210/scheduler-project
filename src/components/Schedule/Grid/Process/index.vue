@@ -10,10 +10,29 @@
     />
     <el-tooltip
       effect="light"
-      content="Thông tin dự án"
       placement="right-start"
       :popper-options="{ boundariesElement: 'viewport', removeOnDestroy: true }"
     >
+      <div slot="content" class="space-y-2">
+        <span class="block">
+          Tên dự án:
+          <strong> {{ project.name }} </strong>
+        </span>
+        <span class="block">
+          Trạng thái:
+          <strong> {{ project.status }} </strong>
+        </span>
+        <span class="block">
+          Ngày bắt đầu:
+          <strong>
+            {{ timeStartProjectFormat }}
+          </strong>
+        </span>
+        <span class="block">
+          Ngày kết thúc:
+          <strong> {{ timeEndProjectFormat }} </strong>
+        </span>
+      </div>
       <Project :style="projectStyle" :project="project" />
     </el-tooltip>
   </div>
@@ -110,6 +129,12 @@ export default {
 
       return timeMaintenanceProject;
     },
+    timeStartProjectFormat() {
+      return moment(this.project.timeStart).format("DD/MM/YYYY");
+    },
+    timeEndProjectFormat() {
+      return moment(this.project.timeEnd).format("DD/MM/YYYY");
+    },
   },
   methods: {
     getEmptyCellPosition(column = { x: 1, y: 2 }, row = { x: 1, y: 2 }) {
@@ -124,9 +149,9 @@ export default {
 
 <style scoped>
 .grid-process {
-  background-color: #fff;
-  /* border-bottom: 1px solid #8395a769; */
-  border-right: 1px solid #8395a769;
+  background-color: #d1ccc0;
+  /* border-bottom: 1px solid #fff; */
+  /* border-right: 1px solid #fff; */
   display: grid;
   grid-row: 1 / 2;
   align-items: center;

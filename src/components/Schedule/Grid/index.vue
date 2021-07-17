@@ -45,13 +45,12 @@ export default {
 
       return cells;
     },
+    visiableGrid() {
+      return this.getProjects && this.getProjects.length > 0;
+    },
   },
-  async created() {
-    try {
-      await this.$store.dispatch(`project/${PROJECT_GET_LIST}`);
-    } catch (error) {
-      console.error(error);
-    }
+  created() {
+    this.$store.dispatch(`project/${PROJECT_GET_LIST}`);
   },
 };
 </script>
@@ -60,7 +59,13 @@ export default {
 .schedule-gird {
   height: 100%;
   width: 100%;
-  overflow-y: scroll;
   grid-row: 2 / 3;
+  overflow: hidden;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+}
+
+.schedule-gird::-webkit-scrollbar {
+  width: 5px;
 }
 </style>

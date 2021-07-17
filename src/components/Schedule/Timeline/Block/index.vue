@@ -1,10 +1,10 @@
 <template>
-  <div class="timeline-block">
+  <div class="timeline-block" :style="blockStyle">
     <div
       class="
         timeline-block__month
         bg-blue-600
-        text-sm
+        text-xs
         flex
         justify-center
         items-center
@@ -44,6 +44,13 @@ export default {
   },
   computed: {
     ...mapGetters("config", ["getConfig"]),
+    blockStyle() {
+      const { height } = this.getConfig;
+
+      return {
+        gridTemplateRows: `${height}px ${height * 2}px`,
+      };
+    },
     bottomBlockStyle() {
       const { width } = this.getConfig;
 
@@ -66,23 +73,30 @@ export default {
 <style scoped>
 .timeline-block {
   height: 100%;
-  border-bottom: 1px solid #8395a769;
+  width: 100%;
+  /* border-bottom: 1px solid #fff; */
   display: grid;
-  grid-auto-rows: 35% 65%;
 }
 
-.timeline-block:last-child {
-  border-right: 1px solid #8395a769;
+.timeline-block:first-child > .timeline-block__month {
+  border-left-width: 0;
 }
 
 .timeline-block__month {
-  border-left: 1px solid #8395a769;
-  border-bottom: 1px solid #8395a769;
+  /* border-left: 1px solid #d1ccc0; */
+  /* border-bottom: 1px solid #d1ccc0; */
+  height: 100%;
+  width: 100%;
   grid-row: 1 / 2;
 }
 
 .timeline-block__day {
+  /* border-left: 1px solid #d1ccc0; */
   grid-row: 2 / 3;
   display: grid;
+}
+
+.timeline-block:first-child > .timeline-block__day {
+  border-left-width: 0;
 }
 </style>

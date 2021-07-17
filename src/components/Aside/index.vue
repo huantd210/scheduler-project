@@ -20,12 +20,8 @@ export default {
   computed: {
     ...mapGetters("project", ["getProjects"]),
   },
-  async created() {
-    try {
-      await this.$store.dispatch(`project/${PROJECT_GET_LIST}`);
-    } catch (error) {
-      console.error(error);
-    }
+  created() {
+    this.$store.dispatch(`project/${PROJECT_GET_LIST}`);
   },
 };
 </script>
