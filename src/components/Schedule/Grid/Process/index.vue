@@ -79,58 +79,36 @@ export default {
       const firstTime = this.getFirstTime;
       const lastTime = this.getLastTime;
 
+      // ignore (unvisible) projects not in range time
       if (!isProjectInRangeTime(this.project, firstTime, lastTime))
         return {
-          gridColumn: "1 / 1",
           gridRow: "1 / 2",
           width: 0,
           gridTemplateColumns: "0px 0px",
+          display: "none",
         };
 
       const { width } = this.getConfig;
-      const timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
+      const start = this.timeStartBorder.diff(firstTime, "days") + 1; // ? -> grid
+      const end = this.timeEndBorder.diff(firstTime, "days") + 2; // ? -> grid
 
-      const diffStart = this.timeStartBorder.diff(firstTime, "days");
-      const diffEnd = this.timeEndBorder.diff(firstTime, "days");
-      const start = diffStart < 0 ? 0 : diffStart + 1; // ? -> grid
-      const end = diffEnd < 0 ? 0 : diffEnd + 2; // ? -> grid
-
-      const rangeProject = end - start > 0 ? end - start : 0; // including maintenance time if any // unit day
-      let gtColStyle = `${rangeProject * width}px 0px`; // default
+      const rangeProject = end - start; // unit day & including maintenance time if any
+      let gridColStyle = `${rangeProject * width}px 0px`; // default
 
       // visiable maintenance
-      if (
-        this.project.status === PROJECT_STATUS.finished &&
-        timeEndProject.isBefore(this.timeEndBorder)
-      ) {
-        gtColStyle =
-          rangeProject <= 0
-            ? "0px 0px"
-            : rangeProject - this.project?.guarantee > 0
-            ? `${(rangeProject - this.project?.guarantee) * width}px ${
-                this.project?.guarantee * width
-              }px`
+      if (this.isFinishedProject) {
+        gridColStyle =
+          rangeProject - this.project?.guarantee > 0
+            ? `${(rangeProject - this.project?.guarantee) * width}px 
+            ${this.project?.guarantee * width}px`
             : `0px ${this.project?.guarantee * width}px`;
       }
-
-      // console.log({
-      //   id: this.project.id,
-      //   rangeProject,
-      //   gtColStyle,
-      //   firstTime: firstTime.format("YYYY-MM-DD"),
-      //   timeStartBorder: this.timeStartBorder.format("YYYY-MM-DD"),
-      //   timeEndBorder: this.timeEndBorder.format("YYYY-MM-DD"),
-      //   start,
-      //   diffStart,
-      //   diffEnd,
-      //   end,
-      // });
 
       return {
         gridColumn: `${start} / ${end}`,
         gridRow: "1 / 2",
         width: `${width * rangeProject}px`,
-        gridTemplateColumns: gtColStyle,
+        gridTemplateColumns: gridColStyle,
       };
     },
     timeStartBorder() {
@@ -142,28 +120,26 @@ export default {
         : timeStartProject;
     },
     timeEndBorder() {
-      /* including maintenance time if any */
       const lastTime = this.getLastTime;
-      const timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
+      let timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
 
-      if (timeEndProject.isAfter(lastTime)) return lastTime;
-      if (this.project?.status !== PROJECT_STATUS.finished /* not "Kết thúc" */)
-        return timeEndProject.isAfter(lastTime) ? lastTime : timeEndProject;
-
-      const timeMaintenanceProject = moment(timeEndProject).add(
-        this.project?.guarantee,
-        "days"
-      );
-
-      if (timeMaintenanceProject.isAfter(lastTime)) return lastTime;
-
-      return timeMaintenanceProject;
+      // including maintenance time if any
+      if (this.isFinishedProject) {
+        timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD").add(
+          this.project?.guarantee,
+          "days"
+        );
+      }
+      return timeEndProject.isAfter(lastTime) ? lastTime : timeEndProject;
     },
     timeStartProjectFormat() {
       return moment(this.project.timeStart).format("DD/MM/YYYY");
     },
     timeEndProjectFormat() {
       return moment(this.project.timeEnd).format("DD/MM/YYYY");
+    },
+    isFinishedProject() {
+      return this.project?.status === PROJECT_STATUS.finished;
     },
   },
   methods: {
