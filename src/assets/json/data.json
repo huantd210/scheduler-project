@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": "id-1",
-      "name": "SNAVI",
+      "name": "Dự án 1",
       "timeStart": "2021-01-01",
       "timeEnd": "2021-07-01",
       "guarantee": 45,
@@ -10,7 +10,7 @@
     },
     {
       "id": "id-2",
-      "name": "SNAVI 2",
+      "name": "Dự án 2",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-08-01",
       "guarantee": 45,
@@ -18,7 +18,7 @@
     },
     {
       "id": "id-3",
-      "name": "SNAVI 3",
+      "name": "Dự án 3",
       "timeStart": "2021-06-01",
       "timeEnd": "2021-09-01",
       "guarantee": 45,
@@ -26,7 +26,7 @@
     },
     {
       "id": "id-4",
-      "name": "SNAVI 4",
+      "name": "Dự án 4",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-06-01",
       "guarantee": 5,
@@ -34,7 +34,7 @@
     },
     {
       "id": "id-5",
-      "name": "SNAVI",
+      "name": "Dự án 5",
       "timeStart": "2021-01-01",
       "timeEnd": "2021-07-01",
       "guarantee": 45,
@@ -42,7 +42,7 @@
     },
     {
       "id": "id-6",
-      "name": "SNAVI 2",
+      "name": "Dự án 6",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-08-01",
       "guarantee": 45,
@@ -50,7 +50,7 @@
     },
     {
       "id": "id-7",
-      "name": "SNAVI 3",
+      "name": "Dự án 7",
       "timeStart": "2021-06-01",
       "timeEnd": "2021-09-01",
       "guarantee": 45,
@@ -58,7 +58,7 @@
     },
     {
       "id": "id-8",
-      "name": "SNAVI 4",
+      "name": "Dự án 8",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-06-01",
       "guarantee": 45,
@@ -66,7 +66,7 @@
     },
     {
       "id": "id-9",
-      "name": "SNAVI",
+      "name": "Dự án 9",
       "timeStart": "2021-01-01",
       "timeEnd": "2021-07-01",
       "guarantee": 45,
@@ -74,7 +74,7 @@
     },
     {
       "id": "id-10",
-      "name": "SNAVI 2",
+      "name": "Dự án 10",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-08-01",
       "guarantee": 45,
@@ -82,7 +82,7 @@
     },
     {
       "id": "id-11",
-      "name": "SNAVI 3",
+      "name": "Dự án 11",
       "timeStart": "2021-06-01",
       "timeEnd": "2021-09-01",
       "guarantee": 45,
@@ -90,7 +90,7 @@
     },
     {
       "id": "id-12",
-      "name": "SNAVI 4",
+      "name": "Dự án 12",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-06-01",
       "guarantee": 45,
@@ -98,7 +98,7 @@
     },
     {
       "id": "id-13",
-      "name": "SNAVI",
+      "name": "Dự án 13",
       "timeStart": "2021-01-01",
       "timeEnd": "2021-07-01",
       "guarantee": 45,
@@ -106,7 +106,7 @@
     },
     {
       "id": "id-14",
-      "name": "SNAVI 2",
+      "name": "Dự án 14",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-08-01",
       "guarantee": 45,
@@ -114,7 +114,7 @@
     },
     {
       "id": "id-15",
-      "name": "SNAVI 3",
+      "name": "Dự án 15",
       "timeStart": "2021-06-01",
       "timeEnd": "2021-09-01",
       "guarantee": 45,
@@ -122,7 +122,7 @@
     },
     {
       "id": "id-16",
-      "name": "SNAVI 4",
+      "name": "Dự án 16",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-06-01",
       "guarantee": 5,
@@ -130,7 +130,7 @@
     },
     {
       "id": "id-17",
-      "name": "SNAVI",
+      "name": "Dự án 17",
       "timeStart": "2021-01-01",
       "timeEnd": "2021-07-01",
       "guarantee": 45,
@@ -138,7 +138,7 @@
     },
     {
       "id": "id-18",
-      "name": "SNAVI 3",
+      "name": "Dự án 18",
       "timeStart": "2021-06-01",
       "timeEnd": "2021-09-01",
       "guarantee": 45,
@@ -146,7 +146,7 @@
     },
     {
       "id": "id-19",
-      "name": "SNAVI 4",
+      "name": "Dự án 19",
       "timeStart": "2021-03-01",
       "timeEnd": "2021-06-01",
       "guarantee": 45,
@@ -154,7 +154,7 @@
     },
     {
       "id": "id-20",
-      "name": "SNAVI",
+      "name": "Dự án 20",
       "timeStart": "2021-01-01",
       "timeEnd": "2021-07-01",
       "guarantee": 45,

@@ -79,6 +79,10 @@ export default {
   display: grid;
 }
 
+.timeline-block:first-child {
+  border-left-width: 0;
+}
+
 .timeline-block:first-child > .timeline-block__month {
   border-left-width: 0;
 }

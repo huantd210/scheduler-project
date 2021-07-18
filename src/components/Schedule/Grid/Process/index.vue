@@ -44,6 +44,7 @@ import moment from "moment";
 import { mapGetters } from "vuex";
 import { PROJECT_SELECTED } from "../../../../constants/actionTypes";
 import { PROJECT_STATUS } from "../../../../constants";
+import { isProjectInRangeTime } from "../../../../utils";
 import CellEmpty from "./Cell";
 import Project from "./Project";
 
@@ -75,13 +76,26 @@ export default {
       };
     },
     projectStyle() {
-      const { width } = this.getConfig;
       const firstTime = this.getFirstTime;
-      const timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
-      const start = this.timeStartBorder.diff(firstTime, "days") + 1; // ? -> grid
-      const end = this.timeEndBorder.diff(firstTime, "days") + 2; // ? -> grid
+      const lastTime = this.getLastTime;
 
-      const rangeProject = end - start; // including maintenance time if any // unit day
+      if (!isProjectInRangeTime(this.project, firstTime, lastTime))
+        return {
+          gridColumn: "1 / 1",
+          gridRow: "1 / 2",
+          width: 0,
+          gridTemplateColumns: "0px 0px",
+        };
+
+      const { width } = this.getConfig;
+      const timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
+
+      const diffStart = this.timeStartBorder.diff(firstTime, "days");
+      const diffEnd = this.timeEndBorder.diff(firstTime, "days");
+      const start = diffStart < 0 ? 0 : diffStart + 1; // ? -> grid
+      const end = diffEnd < 0 ? 0 : diffEnd + 2; // ? -> grid
+
+      const rangeProject = end - start > 0 ? end - start : 0; // including maintenance time if any // unit day
       let gtColStyle = `${rangeProject * width}px 0px`; // default
 
       // visiable maintenance
@@ -89,14 +103,28 @@ export default {
         this.project.status === PROJECT_STATUS.finished &&
         timeEndProject.isBefore(this.timeEndBorder)
       ) {
-        const rangeMainteProject = this.timeEndBorder.diff(
-          timeEndProject,
-          "days"
-        );
-        gtColStyle = `${(rangeProject - rangeMainteProject) * width}px ${
-          rangeMainteProject * width
-        }px`;
+        gtColStyle =
+          rangeProject <= 0
+            ? "0px 0px"
+            : rangeProject - this.project?.guarantee > 0
+            ? `${(rangeProject - this.project?.guarantee) * width}px ${
+                this.project?.guarantee * width
+              }px`
+            : `0px ${this.project?.guarantee * width}px`;
       }
+
+      // console.log({
+      //   id: this.project.id,
+      //   rangeProject,
+      //   gtColStyle,
+      //   firstTime: firstTime.format("YYYY-MM-DD"),
+      //   timeStartBorder: this.timeStartBorder.format("YYYY-MM-DD"),
+      //   timeEndBorder: this.timeEndBorder.format("YYYY-MM-DD"),
+      //   start,
+      //   diffStart,
+      //   diffEnd,
+      //   end,
+      // });
 
       return {
         gridColumn: `${start} / ${end}`,
