@@ -21,6 +21,10 @@
       </span>
       <span class="block">
         Ngày kết thúc:
+        <strong> {{ timeEndExactProjectFormat }} </strong>
+      </span>
+      <span v-if="isFinishedProject" class="block">
+        Hạn bảo trì:
         <strong> {{ timeEndProjectFormat }} </strong>
       </span>
     </div>
@@ -121,22 +125,27 @@ export default {
     },
     timeEndBorder() {
       const lastTime = this.getLastTime;
-      let timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD");
+      let timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD"); // including maintenance time if any (*)
 
-      // including maintenance time if any
       if (this.isFinishedProject) {
         timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD").add(
           this.project?.guarantee,
           "days"
-        );
+        ); // (*)
       }
       return timeEndProject.isAfter(lastTime) ? lastTime : timeEndProject;
     },
     timeStartProjectFormat() {
       return moment(this.project.timeStart).format("DD/MM/YYYY");
     },
-    timeEndProjectFormat() {
+    timeEndExactProjectFormat() {
       return moment(this.project.timeEnd).format("DD/MM/YYYY");
+    },
+    timeEndProjectFormat() {
+      // including maintenance time if any
+      return moment(this.project?.timeEnd, "YYYY-MM-DD")
+        .add(this.project?.guarantee, "days")
+        .format("DD/MM/YYYY");
     },
     isFinishedProject() {
       return this.project?.status === PROJECT_STATUS.finished;
