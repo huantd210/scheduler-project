@@ -10,15 +10,16 @@
   >
     <div :style="devColor" class="process__project--dev"></div>
     <div
-      v-if="visiableMainte"
-      :style="mainteColor"
+      v-if="visiableMaintenance"
+      :style="maintenanceColor"
       class="process__project--mainte"
     ></div>
   </div>
 </template>
 
 <script>
-import { COLORS, PROJECT_STATUS } from "../../../../constants";
+import { mapState } from "vuex";
+import { PROJECT_STATUS } from "../../../../constants";
 
 export default {
   name: "process-project",
@@ -29,19 +30,25 @@ export default {
     },
   },
   computed: {
+    ...mapState(["config"]),
     devColor() {
-      let projectColor = COLORS.started;
+      let projectColor;
+
       switch (this.project.status) {
         case PROJECT_STATUS.negotiate: // "Đàm phán"
-          projectColor = COLORS.negotiate;
+          projectColor = this.config?.colors?.negotiate;
           break;
 
-        case PROJECT_STATUS.notStartedYet: // "Chưa bắt đầu"
-          projectColor = COLORS.notStartedYet;
+        case PROJECT_STATUS.not_started: // "Chưa bắt đầu"
+          projectColor = this.config?.colors?.notStarted;
+          break;
+
+        case PROJECT_STATUS.started: // "Bắt đầu"
+          projectColor = this.config?.colors?.started;
           break;
 
         case PROJECT_STATUS.finished: // "Kết thúc"
-          projectColor = COLORS.finished;
+          projectColor = this.config?.colors?.finished;
           break;
 
         default:
@@ -50,10 +57,10 @@ export default {
 
       return { backgroundColor: projectColor };
     },
-    mainteColor() {
-      return { backgroundColor: COLORS.maintenance };
+    maintenanceColor() {
+      return { backgroundColor: this.config?.colors?.maintenance };
     },
-    visiableMainte() {
+    visiableMaintenance() {
       return this.project.status === PROJECT_STATUS.finished;
     },
   },

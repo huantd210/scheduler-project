@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import moment from "moment";
 import Block from "./Block/index.vue";
 
@@ -26,11 +26,11 @@ export default {
     Block,
   },
   computed: {
-    ...mapGetters("config", ["getConfig"]),
+    ...mapState(["config"]),
     getBlocks() {
-      const { range } = this.getConfig;
+      const { range } = this.config;
 
-      const firstTime = moment(this.getConfig?.firstTime, "YYYY-MM-DD");
+      const firstTime = moment(this.config?.firstTime, "YYYY-MM-DD");
       const startOfMonth = moment(
         moment(firstTime).startOf("month").format("YYYY-MM-DD")
       );
@@ -39,7 +39,7 @@ export default {
       blocks.push({
         date: firstTime,
         cells: this.getCells(firstTime),
-      }); // begin
+      }); // first
 
       for (let i = 1; i < range; i++) {
         const currentTime = moment(
@@ -57,7 +57,7 @@ export default {
       return blocks;
     },
     timelineStyle() {
-      const { range, height } = this.getConfig;
+      const { range, height } = this.config;
 
       return {
         gridTemplateColumns: `repeat(
@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     blockStyle(column = { x: 1, y: 2 }, row = { x: 1, y: 2 }, cells) {
-      const { width } = this.getConfig;
+      const { width } = this.config;
 
       return {
         gridColumn: `${column.x} / ${column.y}`,

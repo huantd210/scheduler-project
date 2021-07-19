@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import moment from "moment";
 import { PROJECT_GET_LIST } from "../../../constants/actionTypes";
 import Process from "./Process/index.vue";
@@ -21,11 +21,11 @@ export default {
     Process,
   },
   computed: {
+    ...mapState(["config"]),
     ...mapGetters("project", ["getProjects"]),
-    ...mapGetters("config", ["getConfig"]),
     getEmptyCells() {
-      const { range } = this.getConfig;
-      const firstTime = moment(this.getConfig?.firstTime, "YYYY-MM-DD");
+      const { range } = this.config;
+      const firstTime = moment(this.config?.firstTime, "YYYY-MM-DD");
       const lastTime = moment(
         moment(firstTime)
           .add(range - 1, "months")

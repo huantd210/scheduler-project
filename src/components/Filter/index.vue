@@ -1,7 +1,7 @@
 <template>
   <div class="schedule-filter inline-flex space-x-2">
     <el-date-picker
-      style="max-width: 140px"
+      style="max-width: 160px"
       v-model="firstTime"
       type="date"
       placeholder="Ngày bắt đầu"
@@ -12,10 +12,11 @@
     >
     </el-date-picker>
     <el-select
-      style="max-width: 140px"
+      style="max-width: 120px"
       v-model="range"
-      placeholder="Khoảng thời gian"
+      placeholder="Phạm vi"
       size="small"
+      clearable
       @change="onConfigChange"
     >
       <el-option
@@ -30,7 +31,7 @@
 </template>
 <script>
 import moment from "moment";
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import {
   SCHEDULE_SET_TIME,
   SCHEDULE_SET_RANGE,
@@ -55,10 +56,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("config", ["getConfig"]),
+    ...mapState(["config"]),
     firstTime: {
       get() {
-        return this.getConfig?.firstTime;
+        return this.config?.firstTime;
       },
       set(date) {
         this.$store.dispatch(`config/${SCHEDULE_SET_TIME}`, {
@@ -68,7 +69,7 @@ export default {
     },
     range: {
       get() {
-        return this.getConfig?.range;
+        return this.config?.range;
       },
       set(value) {
         this.$store.dispatch(`config/${SCHEDULE_SET_RANGE}`, {

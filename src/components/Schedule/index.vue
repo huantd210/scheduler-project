@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import Timeline from "./Timeline/index.vue";
 import Grid from "./Grid/index.vue";
 
@@ -22,16 +22,16 @@ export default {
     Grid,
   },
   computed: {
-    ...mapGetters("config", ["getConfig"]),
+    ...mapState(["config"]),
     scheduleStyle() {
-      const { height } = this.getConfig;
+      const { height } = this.config;
 
       return {
         gridTemplateRows: `${height * 3}px calc(100% - ${height * 3}px)`,
       };
     },
     visiableSchedule() {
-      return this.getConfig?.firstTime && this.getConfig?.range;
+      return this.config?.firstTime && this.config?.range;
     },
   },
 };

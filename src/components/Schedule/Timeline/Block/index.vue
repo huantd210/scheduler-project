@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import Cell from "./Cell";
 
 export default {
@@ -43,16 +43,16 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("config", ["getConfig"]),
+    ...mapState(["config"]),
     blockStyle() {
-      const { height } = this.getConfig;
+      const { height } = this.config;
 
       return {
         gridTemplateRows: `${height}px ${height * 2}px`,
       };
     },
     bottomBlockStyle() {
-      const { width } = this.getConfig;
+      const { width } = this.config;
 
       return {
         gridTemplateColumns: `repeat(${this.block.cells.length}, ${width}px)`,

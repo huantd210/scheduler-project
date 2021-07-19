@@ -45,7 +45,7 @@
 
 <script>
 import moment from "moment";
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import { PROJECT_SELECTED } from "../../../../constants/actionTypes";
 import { PROJECT_STATUS } from "../../../../constants";
 import { isProjectInRangeTime } from "../../../../utils";
@@ -69,9 +69,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("config", ["getConfig", "getFirstTime", "getLastTime"]),
+    ...mapState(["config"]),
+    ...mapGetters("config", ["getFirstTime", "getLastTime"]),
     processStyle() {
-      const { width, height } = this.getConfig;
+      const { width, height } = this.config;
 
       return {
         gridTemplateColumns: `repeat(${this.cells.length}, ${width}px)`,
@@ -92,7 +93,7 @@ export default {
           display: "none",
         };
 
-      const { width } = this.getConfig;
+      const { width } = this.config;
       const start = this.timeStartBorder.diff(firstTime, "days") + 1; // ? -> grid
       const end = this.timeEndBorder.diff(firstTime, "days") + 2; // ? -> grid
 

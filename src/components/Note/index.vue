@@ -1,45 +1,65 @@
 <template>
   <div class="schedule-note">
     <div
-      class="inline-flex space-x-1 px-2 justify-center items-center"
+      class="inline-flex space-x-1.5 px-3 justify-center items-center"
       v-for="(item, index) in notes"
       :key="`nt-${index}`"
     >
-      <div class="square-color" :style="{ backgroundColor: item.color }"></div>
+      <el-color-picker
+        size="mini"
+        :value="item.color"
+        @change="onColorChange($event, item.key)"
+      ></el-color-picker>
       <div class="text-sm">{{ item.name }}</div>
     </div>
   </div>
 </template>
 <script>
-import { COLORS } from "../../constants";
+import { mapState } from "vuex";
+import { SCHEDULE_SET_COLOR } from "../../constants/actionTypes";
 
 export default {
   name: "schedule-note",
-  data() {
-    return {
-      notes: [
+  computed: {
+    ...mapState(["config"]),
+    notes() {
+      return [
         {
+          key: "negotiate",
           name: "Đàm phán",
-          color: COLORS.negotiate,
+          color: this.config?.colors?.negotiate,
         },
         {
+          key: "notStarted",
           name: "Chưa bắt đầu",
-          color: COLORS.notStartedYet,
+          color: this.config?.colors?.notStarted,
         },
         {
+          key: "started",
           name: "Bắt đầu",
-          color: COLORS.started,
+          color: this.config?.colors?.started,
         },
         {
+          key: "finished",
           name: "Kết thúc",
-          color: COLORS.finished,
+          color: this.config?.colors?.finished,
         },
         {
+          key: "maintenance",
           name: "Bảo trì",
-          color: COLORS.maintenance,
+          color: this.config?.colors?.maintenance,
         },
-      ],
-    };
+      ];
+    },
+  },
+  methods: {
+    onColorChange(color, key) {
+      this.$store.dispatch(`config/${SCHEDULE_SET_COLOR}`, {
+        colors: {
+          [key]: color,
+        },
+      });
+    },
   },
 };
 </script>
