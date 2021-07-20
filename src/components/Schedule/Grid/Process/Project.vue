@@ -10,7 +10,7 @@
   >
     <div :style="devColor" class="process__project--dev"></div>
     <div
-      v-if="visiableMaintenance"
+      v-if="project.isFinished"
       :style="maintenanceColor"
       class="process__project--mainte"
     ></div>
@@ -59,9 +59,6 @@ export default {
     },
     maintenanceColor() {
       return { backgroundColor: this.config?.colors?.maintenance };
-    },
-    visiableMaintenance() {
-      return this.project.status === PROJECT_STATUS.finished;
     },
   },
 };

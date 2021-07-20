@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import Timeline from "./Timeline/index.vue";
 import Grid from "./Grid/index.vue";
 
@@ -23,6 +23,7 @@ export default {
   },
   computed: {
     ...mapState(["config"]),
+    ...mapGetters("project", ["getProjects"]),
     scheduleStyle() {
       const { height } = this.config;
 

@@ -23,7 +23,7 @@
         Ngày kết thúc:
         <strong> {{ timeEndExactProjectFormat }} </strong>
       </span>
-      <span v-if="isFinishedProject" class="block">
+      <span v-if="project.isFinished" class="block">
         Hạn bảo trì:
         <strong> {{ timeEndProjectFormat }} </strong>
       </span>
@@ -47,8 +47,6 @@
 import moment from "moment";
 import { mapState, mapGetters } from "vuex";
 import { PROJECT_SELECTED } from "../../../../constants/actionTypes";
-import { PROJECT_STATUS } from "../../../../constants";
-import { isProjectInRangeTime } from "../../../../utils";
 import CellEmpty from "./Cell";
 import Project from "./Project";
 
@@ -82,10 +80,9 @@ export default {
     },
     projectStyle() {
       const firstTime = this.getFirstTime;
-      const lastTime = this.getLastTime;
 
       // ignore (unvisible) projects not in range time
-      if (!isProjectInRangeTime(this.project, firstTime, lastTime))
+      if (!this.project?.isProjectInRangeTime)
         return {
           gridRow: "1 / 2",
           width: 0,
@@ -101,7 +98,7 @@ export default {
       let gridColStyle = `${rangeProject * width}px 0px`; // default
 
       // visiable maintenance
-      if (this.isFinishedProject) {
+      if (this.project?.isFinished) {
         gridColStyle =
           rangeProject - this.project?.guarantee > 0
             ? `${(rangeProject - this.project?.guarantee) * width}px 
@@ -128,7 +125,7 @@ export default {
       const lastTime = this.getLastTime;
       let timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD"); // including maintenance time if any (*)
 
-      if (this.isFinishedProject) {
+      if (this.project?.isFinished) {
         timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD").add(
           this.project?.guarantee,
           "days"
@@ -147,9 +144,6 @@ export default {
       return moment(this.project?.timeEnd, "YYYY-MM-DD")
         .add(this.project?.guarantee, "days")
         .format("DD/MM/YYYY");
-    },
-    isFinishedProject() {
-      return this.project?.status === PROJECT_STATUS.finished;
     },
   },
   methods: {
