@@ -1,21 +1,18 @@
 <template>
   <div id="app">
     <el-container>
-      <el-aside width="200px" class="h-screen text-center border-r">
-        <el-menu class="border-0">
-          <el-menu-item
-            class="text-left border-b"
-            @click.native="visibleFormCreate = true"
-          >
-            <i class="el-icon-plus"></i>
-            Thêm dự án mới
-          </el-menu-item>
-        </el-menu>
+      <el-aside width="auto" class="h-screen text-center border-r">
+        <Menu
+          :visible="visibleDialogNewProject"
+          @onVisible="onVisibleDialogNewProject"
+        />
       </el-aside>
       <el-container class="p-0 h-screen overflow-hidden">
-        <el-header class="flex justify-between items-center">
+        <el-header
+          style="height: fit-content"
+          class="py-3 block md:flex md:justify-between md:items-center"
+        >
           <FilterSchedule />
-
           <NoteSchedule />
         </el-header>
         <el-main class="p-0 h-full overflow-hidden">
@@ -24,35 +21,40 @@
       </el-container>
     </el-container>
 
-    <FormCreate :visible="visibleFormCreate" @onVisible="onVisibleCreate" />
-    <FormEdit />
+    <DialogNewProject
+      :visible="visibleDialogNewProject"
+      @onVisible="onVisibleDialogNewProject"
+    />
+    <DialogEditProject />
   </div>
 </template>
 
 <script>
+import Menu from "./components/Menu/index.vue";
 import FilterSchedule from "./components/Filter/index.vue";
 import NoteSchedule from "./components/Note/index.vue";
 import Schedule from "./components/Schedule/index.vue";
-import FormCreate from "./components/Form/Create.vue";
-import FormEdit from "./components/Form/Edit.vue";
+import DialogNewProject from "./components/Form/Create.vue";
+import DialogEditProject from "./components/Form/Edit.vue";
 
 export default {
   name: "App",
   components: {
+    Menu,
     FilterSchedule,
     NoteSchedule,
     Schedule,
-    FormCreate,
-    FormEdit,
+    DialogNewProject,
+    DialogEditProject,
   },
   data() {
     return {
-      visibleFormCreate: false,
+      visibleDialogNewProject: false,
     };
   },
   methods: {
-    onVisibleCreate(visible) {
-      this.visibleFormCreate = visible;
+    onVisibleDialogNewProject(visible) {
+      this.visibleDialogNewProject = visible;
     },
   },
 };

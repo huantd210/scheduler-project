@@ -64,8 +64,4 @@ export default {
   overflow-y: scroll;
   overscroll-behavior: contain;
 }
-
-.schedule-gird::-webkit-scrollbar {
-  width: 5px;
-}
 </style>

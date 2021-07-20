@@ -1,5 +1,5 @@
 <template>
-  <div class="schedule-filter inline-flex space-x-2">
+  <div class="schedule-filter flex space-x-2">
     <el-date-picker
       style="max-width: 160px"
       v-model="firstTime"

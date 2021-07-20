@@ -1,7 +1,7 @@
 <template>
-  <div class="schedule-note">
+  <div class="schedule-note flex flex-wrap mt-3 md:mt-0">
     <div
-      class="inline-flex space-x-1.5 px-3 justify-center items-center"
+      class="flex-1 flex space-x-1.5 px-3 justify-center items-center"
       v-for="(item, index) in notes"
       :key="`nt-${index}`"
     >
