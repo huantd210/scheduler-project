@@ -24,7 +24,6 @@ export default {
     },
     [PROJECT_CREATE](state, payload) {
       state.projects.push(payload?.project);
-      console.log(state);
     },
     [PROJECT_EDIT](state, payload) {
       state.projects = state.projects.map((it) =>
@@ -33,7 +32,6 @@ export default {
     },
     [PROJECT_SELECTED](state, payload) {
       state.projectSelected = payload?.project;
-      console.log(state.projectSelected);
     },
   },
   actions: {

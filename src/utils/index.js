@@ -28,7 +28,7 @@ export const isProjectInRangeTime = (project, first, last) => {
 
   if (project.status === PROJECT_STATUS.finished) {
     timeEndProject = moment(project.timeEnd, "YYYY-MM-DD").add(
-      project.guarantee,
+      project?.maintenance,
       "days"
     );
   }

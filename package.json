@@ -22,6 +22,7 @@
     "shortid": "^2.2.16",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^2.6.11",
+    "vue-screen-size": "^1.0.1",
     "vue-window-size": "^1.1.2",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.0.0-beta.3"

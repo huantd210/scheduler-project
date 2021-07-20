@@ -14,3 +14,11 @@ export const PROJECT_STATUS = {
   started: "Bắt đầu",
   finished: "Kết thúc",
 };
+
+export const WINDOW_SIZE = {
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  xxl: 1536,
+};

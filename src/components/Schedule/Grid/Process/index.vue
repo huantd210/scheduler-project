@@ -25,10 +25,19 @@
       </span>
       <span v-if="project.isFinished" class="block">
         Hạn bảo trì:
-        <strong> {{ timeEndProjectFormat }} </strong>
+        <strong>
+          {{ timeEndProjectFormat }}
+        </strong>
       </span>
     </div>
-    <div class="grid-process" :style="processStyle" @dblclick="onSelectProject">
+    <div
+      :class="[
+        project.isProjectInRangeTime ? 'bg-white' : 'bg-gray-100',
+        'grid-process',
+      ]"
+      :style="processStyle"
+      @dblclick="onSelectProject"
+    >
       <CellEmpty
         v-for="(item, index) in cells"
         :key="`de-${index}`"
@@ -100,10 +109,10 @@ export default {
       // visiable maintenance
       if (this.project?.isFinished) {
         gridColStyle =
-          rangeProject - this.project?.guarantee > 0
-            ? `${(rangeProject - this.project?.guarantee) * width}px 
-            ${this.project?.guarantee * width}px`
-            : `0px ${this.project?.guarantee * width}px`;
+          rangeProject - this.project?.maintenance > 0
+            ? `${(rangeProject - this.project?.maintenance) * width}px 
+            ${this.project?.maintenance * width}px`
+            : `0px ${this.project?.maintenance * width}px`;
       }
 
       return {
@@ -127,7 +136,7 @@ export default {
 
       if (this.project?.isFinished) {
         timeEndProject = moment(this.project?.timeEnd, "YYYY-MM-DD").add(
-          this.project?.guarantee,
+          this.project?.maintenance,
           "days"
         ); // (*)
       }
@@ -142,7 +151,7 @@ export default {
     timeEndProjectFormat() {
       // including maintenance time if any
       return moment(this.project?.timeEnd, "YYYY-MM-DD")
-        .add(this.project?.guarantee, "days")
+        .add(this.project?.maintenance, "days")
         .format("DD/MM/YYYY");
     },
   },
@@ -166,7 +175,6 @@ export default {
 
 <style scoped>
 .grid-process {
-  background-color: #d1ccc0;
   border-bottom: 1px solid #222f3e4a;
   /* border-right: 1px solid #fff; */
   display: grid;

@@ -1,5 +1,8 @@
 <template>
-  <div class="process__cell--empty overflow-hidden" :class="cellClass"></div>
+  <div
+    class="process__cell--empty bg-transparent overflow-hidden"
+    :class="cellClass"
+  ></div>
 </template>
 
 <script>
@@ -31,7 +34,6 @@ export default {
 
 <style scoped>
 .process__cell--empty {
-  background-color: #fff;
   height: 100%;
   width: 100%;
 }

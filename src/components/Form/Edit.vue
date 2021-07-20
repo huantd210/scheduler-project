@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    ref="dialogFormEdit"
+    :width="dialogWidth"
     title="Thông tin dự án"
     :visible.sync="visibleSync"
     :show-close="false"
@@ -69,7 +69,7 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button size="small" @click="visibleSync = false">Hủy bỏ</el-button>
+      <el-button size="small" @click="visibleSync = false">Thoát</el-button>
       <el-button type="primary" size="small" @click="onSave">Lưu lại</el-button>
     </span>
   </el-dialog>
@@ -77,6 +77,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { PROJECT_SELECTED, PROJECT_EDIT } from "../../constants/actionTypes";
+import { WINDOW_SIZE } from "../../constants";
 
 export default {
   name: "form-edit",
@@ -150,6 +151,12 @@ export default {
           });
         }
       },
+    },
+    dialogWidth() {
+      if (this.$vssWidth < WINDOW_SIZE.sm) return "60%";
+      if (this.$vssWidth < WINDOW_SIZE.lg) return "40%";
+
+      return "30%";
     },
   },
   methods: {

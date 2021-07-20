@@ -1,5 +1,10 @@
 <template>
-  <el-dialog title="Dự án mới" :visible.sync="visibleSync" :show-close="false">
+  <el-dialog
+    :width="dialogWidth"
+    title="Dự án mới"
+    :visible.sync="visibleSync"
+    :show-close="false"
+  >
     <el-form ref="formCreate" :model="form" :rules="rules" label-position="top">
       <el-form-item label="Tên dự án" prop="name" required>
         <el-input
@@ -63,13 +68,14 @@
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button size="small" @click="visibleSync = false">Hủy bỏ</el-button>
-      <el-button size="small" type="primary" @click="onSave">Lưu lại</el-button>
+      <el-button size="small" type="primary" @click="onSave">Tạo mới</el-button>
     </span>
   </el-dialog>
 </template>
 <script>
 import moment from "moment";
 import { PROJECT_CREATE } from "../../constants/actionTypes";
+import { WINDOW_SIZE } from "../../constants";
 
 export default {
   name: "form-create",
@@ -141,6 +147,12 @@ export default {
       set: function (value) {
         this.$emit("onVisible", value);
       },
+    },
+    dialogWidth() {
+      if (this.$vssWidth < WINDOW_SIZE.sm) return "60%";
+      if (this.$vssWidth < WINDOW_SIZE.lg) return "40%";
+
+      return "30%";
     },
   },
   methods: {

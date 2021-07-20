@@ -67,6 +67,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.el-dialog {
+  border-radius: 0.25rem;
+}
+
+.el-dialog .el-dialog__header {
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+  border-radius: 0.25rem;
+}
+
 .el-dialog .el-dialog__body {
   padding: 20px;
 }
@@ -77,5 +87,6 @@ export default {
 
 .el-dialog .el-dialog__body .el-form .el-form-item .el-form-item__label {
   padding: 0;
+  line-height: 32px;
 }
 </style>
