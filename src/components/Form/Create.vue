@@ -149,8 +149,12 @@ export default {
       },
     },
     dialogWidth() {
-      if (this.$vssWidth < WINDOW_SIZE.sm) return "60%";
-      if (this.$vssWidth < WINDOW_SIZE.lg) return "40%";
+      if (this.$vssWidth < WINDOW_SIZE.sm) return "80%";
+      if (this.$vssWidth < WINDOW_SIZE.md) return "70%";
+      if (this.$vssWidth < WINDOW_SIZE.lg) return "50%";
+      if (this.$vssWidth < WINDOW_SIZE.xl) return "40%";
+
+      console.log(this.$vssWidth);
 
       return "30%";
     },
