@@ -64,8 +64,4 @@ export default {
 };
 </script>
 <style scoped>
-.square-color {
-  width: 15px;
-  height: 15px;
-}
 </style>
