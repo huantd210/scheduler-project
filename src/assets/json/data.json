@@ -1,164 +1,149 @@
 {
   "projects": [
     {
-      "id": "id-1",
+      "id": "8ab439e5-4dc8-44f4-b6ca-8ae8dc1eec2a",
       "name": "Dự án 1",
-      "timeStart": "2021-01-01",
-      "timeEnd": "2021-07-01",
-      "guarantee": 45,
-      "status": "Đàm phán"
+      "status": "Đàm phán",
+      "timeStart": "2021-03-18",
+      "timeEnd": "2021-12-21"
     },
     {
-      "id": "id-2",
+      "id": "754fed1d-2d1d-430c-98c8-072bbc105613",
       "name": "Dự án 2",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-08-01",
-      "guarantee": 45,
-      "status": "Chưa bắt đầu"
+      "status": "Chưa bắt đầu",
+      "timeStart": "2021-01-27",
+      "timeEnd": "2021-06-15"
     },
     {
-      "id": "id-3",
+      "id": "90a6c934-9e63-4562-8939-f07efb30537b",
       "name": "Dự án 3",
-      "timeStart": "2021-06-01",
-      "timeEnd": "2021-09-01",
-      "guarantee": 45,
-      "status": "Bắt đầu"
+      "status": "Bắt đầu",
+      "timeStart": "2021-04-13",
+      "timeEnd": "2021-09-02"
     },
     {
-      "id": "id-4",
+      "id": "591ff999-5d92-4d08-9eb7-5904188b3b7a",
       "name": "Dự án 4",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-06-01",
-      "guarantee": 5,
-      "status": "Kết thúc"
+      "status": "Kết thúc",
+      "timeStart": "2021-03-10",
+      "timeEnd": "2021-11-04",
+      "maintenance": 5
     },
     {
-      "id": "id-5",
+      "id": "3d8e7253-9e2e-4227-a942-4df91aedc0de",
       "name": "Dự án 5",
-      "timeStart": "2021-01-01",
-      "timeEnd": "2021-07-01",
-      "guarantee": 45,
-      "status": "Đàm phán"
+      "status": "Đàm phán",
+      "timeStart": "2021-03-11",
+      "timeEnd": "2021-10-09"
     },
     {
-      "id": "id-6",
+      "id": "c13c8997-ba8f-43f1-9895-ac85ddfa17cd",
       "name": "Dự án 6",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-08-01",
-      "guarantee": 45,
-      "status": "Chưa bắt đầu"
+      "status": "Chưa bắt đầu",
+      "timeStart": "2021-04-03",
+      "timeEnd": "2021-07-26"
     },
     {
-      "id": "id-7",
+      "id": "2bb02daf-2a07-41a9-a5e8-e51b25d7f6a5",
       "name": "Dự án 7",
-      "timeStart": "2021-06-01",
-      "timeEnd": "2021-09-01",
-      "guarantee": 45,
-      "status": "Bắt đầu"
+      "status": "Bắt đầu",
+      "timeStart": "2021-01-11",
+      "timeEnd": "2021-08-20"
     },
     {
-      "id": "id-8",
+      "id": "38d963b9-430b-499c-bc42-e4c474b7a080",
       "name": "Dự án 8",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-06-01",
-      "guarantee": 45,
-      "status": "Kết thúc"
+      "status": "Kết thúc",
+      "timeStart": "2021-01-04",
+      "timeEnd": "2021-11-29",
+      "maintenance": 15
     },
     {
-      "id": "id-9",
+      "id": "05ae2da1-6fb5-465f-881d-25054e43da53",
       "name": "Dự án 9",
-      "timeStart": "2021-01-01",
-      "timeEnd": "2021-07-01",
-      "guarantee": 45,
-      "status": "Đàm phán"
+      "status": "Đàm phán",
+      "timeStart": "2021-03-31",
+      "timeEnd": "2021-10-16"
     },
     {
-      "id": "id-10",
+      "id": "06bed400-ed9b-4579-82ac-b78df76b1acf",
       "name": "Dự án 10",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-08-01",
-      "guarantee": 45,
-      "status": "Chưa bắt đầu"
+      "status": "Chưa bắt đầu",
+      "timeStart": "2021-03-18",
+      "timeEnd": "2021-08-28"
     },
     {
-      "id": "id-11",
+      "id": "a379cfa5-9b76-43a9-945c-88308bf66827",
       "name": "Dự án 11",
-      "timeStart": "2021-06-01",
-      "timeEnd": "2021-09-01",
-      "guarantee": 45,
-      "status": "Bắt đầu"
+      "status": "Bắt đầu",
+      "timeStart": "2021-04-02",
+      "timeEnd": "2021-06-01"
     },
     {
-      "id": "id-12",
+      "id": "b57862c4-691c-4b46-aea8-e7d0ca6051a4",
       "name": "Dự án 12",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-06-01",
-      "guarantee": 45,
-      "status": "Kết thúc"
+      "status": "Kết thúc",
+      "timeStart": "2021-02-20",
+      "timeEnd": "2021-06-25",
+      "maintenance": 25
     },
     {
-      "id": "id-13",
+      "id": "01cebffb-6858-4f50-b71a-bb97e9d1a1d8",
       "name": "Dự án 13",
-      "timeStart": "2021-01-01",
-      "timeEnd": "2021-07-01",
-      "guarantee": 45,
-      "status": "Đàm phán"
+      "status": "Đàm phán",
+      "timeStart": "2021-04-17",
+      "timeEnd": "2021-12-20"
     },
     {
-      "id": "id-14",
+      "id": "339870d0-dd4a-463e-b1dc-d96f06f7eec1",
       "name": "Dự án 14",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-08-01",
-      "guarantee": 45,
-      "status": "Chưa bắt đầu"
+      "status": "Chưa bắt đầu",
+      "timeStart": "2021-01-26",
+      "timeEnd": "2021-08-26"
     },
     {
-      "id": "id-15",
+      "id": "d0608556-e28b-46db-a002-d966edb3cd53",
       "name": "Dự án 15",
-      "timeStart": "2021-06-01",
-      "timeEnd": "2021-09-01",
-      "guarantee": 45,
-      "status": "Bắt đầu"
+      "status": "Bắt đầu",
+      "timeStart": "2021-01-25",
+      "timeEnd": "2021-12-13"
     },
     {
-      "id": "id-16",
+      "id": "261b60a7-dc5f-4e25-85b8-5bd013edbda4",
       "name": "Dự án 16",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-06-01",
-      "guarantee": 5,
-      "status": "Kết thúc"
+      "status": "Kết thúc",
+      "timeStart": "2021-04-15",
+      "timeEnd": "2021-12-16",
+      "maintenance": 35
     },
     {
-      "id": "id-17",
+      "id": "20efab30-0482-42e5-b5e9-3a82a60a7de4",
       "name": "Dự án 17",
-      "timeStart": "2021-01-01",
-      "timeEnd": "2021-07-01",
-      "guarantee": 45,
-      "status": "Đàm phán"
+      "status": "Đàm phán",
+      "timeStart": "2021-02-15",
+      "timeEnd": "2021-11-25"
     },
     {
-      "id": "id-18",
+      "id": "c3d7284a-c4d8-485c-9d39-67a781a99829",
       "name": "Dự án 18",
-      "timeStart": "2021-06-01",
-      "timeEnd": "2021-09-01",
-      "guarantee": 45,
-      "status": "Bắt đầu"
+      "status": "Bắt đầu",
+      "timeStart": "2021-03-12",
+      "timeEnd": "2021-10-02"
     },
     {
-      "id": "id-19",
+      "id": "a5a2c512-fc9d-4121-a482-ba7466fbac84",
       "name": "Dự án 19",
-      "timeStart": "2021-03-01",
-      "timeEnd": "2021-06-01",
-      "guarantee": 45,
-      "status": "Kết thúc"
+      "status": "Kết thúc",
+      "timeStart": "2021-04-20",
+      "timeEnd": "2021-09-20",
+      "maintenance": 60
     },
     {
-      "id": "id-20",
+      "id": "43e5af0d-a537-4b69-ad1f-04fd1f4030d5",
       "name": "Dự án 20",
-      "timeStart": "2021-01-01",
-      "timeEnd": "2021-07-01",
-      "guarantee": 45,
-      "status": "Đàm phán"
+      "status": "Đàm phán",
+      "timeStart": "2021-04-17",
+      "timeEnd": "2021-08-01"
     }
   ]
 }
