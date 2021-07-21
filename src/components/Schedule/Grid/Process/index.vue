@@ -1,10 +1,16 @@
 <template>
-  <el-tooltip
-    effect="light"
-    placement="right-start"
-    :popper-options="{ boundariesElement: 'viewport', removeOnDestroy: true }"
+  <el-popover
+    ref="processPopover"
+    placement="left"
+    :popper-options="{
+      boundariesElement: 'viewport',
+      removeOnDestroy: true,
+      offset: [10, 10],
+    }"
+    :open-delay="300"
+    @show="onShow"
   >
-    <div slot="content" class="space-y-2">
+    <div class="space-y-2" style="top: 0">
       <span class="block">
         Tên dự án:
         <strong> {{ project.name }} </strong>
@@ -30,7 +36,10 @@
         </strong>
       </span>
     </div>
+
+    <!-- process -->
     <div
+      slot="reference"
       :class="[
         project.isProjectInRangeTime ? 'bg-white' : 'bg-gray-100',
         'grid-process',
@@ -49,7 +58,7 @@
 
       <Project :style="projectStyle" :project="project" />
     </div>
-  </el-tooltip>
+  </el-popover>
 </template>
 
 <script>
@@ -168,6 +177,11 @@ export default {
           ...this.project,
         },
       });
+    },
+    onShow() {
+      console.log(this.$refs.processPopover);
+      // this.$refs.processPopover.$el.offsetTop = 0;
+      // this.$refs.processPopover.$el.offsetLeft = 0;
     },
   },
 };
