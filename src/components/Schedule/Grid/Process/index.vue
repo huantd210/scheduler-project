@@ -2,10 +2,10 @@
   <el-popover
     ref="processPopover"
     placement="left"
+    trigger="hover"
     :popper-options="{
       boundariesElement: 'viewport',
       removeOnDestroy: true,
-      offset: [10, 10],
     }"
     :open-delay="300"
     @show="onShow"
