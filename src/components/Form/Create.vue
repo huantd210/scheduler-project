@@ -164,7 +164,7 @@ export default {
         maintenance: [
           {
             required: true,
-            message: "Yêu cầu nhập ngày kết thúc (dự kiến)",
+            message: "Yêu cầu nhập ngày kết thúc",
             trigger: "blur",
           },
         ],
