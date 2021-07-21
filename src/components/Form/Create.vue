@@ -15,17 +15,26 @@
       </el-form-item>
       <el-form-item label="Trạng thái" prop="status" required>
         <el-select
-          v-model="form.status"
-          placeholder="Trạng thái dự án"
-          size="small"
           style="width: 100%"
+          v-model="form.status"
+          allow-create
+          filterable
+          clearable
+          size="small"
+          placeholder="Trạng thái dự án"
         >
           <el-option
+            class="flex justify-between items-center"
             v-for="(item, index) in optionsStatus"
             :key="index"
             :label="item.label"
             :value="item.value"
           >
+            <span>{{ item.label }}</span>
+            <span
+              class="w-2 h-2 rounded-full shadow"
+              :style="{ background: item.color }"
+            ></span>
           </el-option>
         </el-select>
       </el-form-item>
@@ -33,11 +42,10 @@
         <el-col :span="11">
           <el-form-item prop="timeStart">
             <el-date-picker
+              style="width: 100%"
               type="date"
-              placeholder="Ngày bắt đầu"
               v-model="form.timeStart"
               size="small"
-              style="width: 100%"
             ></el-date-picker>
           </el-form-item>
         </el-col>
@@ -45,24 +53,28 @@
         <el-col :span="11">
           <el-form-item prop="timeEnd">
             <el-date-picker
-              placeholder="Ngày kết thúc"
+              style="width: 100%"
               v-model="form.timeEnd"
               size="small"
-              style="width: 100%"
+              :picker-options="pickerEndOptions"
+              placeholder="Ngày kết thúc"
             ></el-date-picker>
           </el-form-item>
         </el-col>
       </el-form-item>
-      <el-form-item label="Bảo hành (Ngày)" required>
+      <el-form-item label="Bảo trì">
         <el-col :span="11">
-          <el-form-item prop="guarantee">
+          <el-form-item prop="maintenance">
             <el-input-number
-              v-model="form.guarantee"
+              v-model="form.maintenance"
               :min="0"
               size="small"
               style="width: 100%"
             ></el-input-number>
           </el-form-item>
+        </el-col>
+        <el-col :span="4">
+          <span class="px-2">(ngày)</span>
         </el-col>
       </el-form-item>
     </el-form>
@@ -75,7 +87,7 @@
 <script>
 import moment from "moment";
 import { PROJECT_CREATE } from "../../constants/actionTypes";
-import { WINDOW_SIZE } from "../../constants";
+import { COLORS, WINDOW_SIZE } from "../../constants";
 
 export default {
   name: "form-create",
@@ -88,16 +100,36 @@ export default {
   data() {
     return {
       optionsStatus: [
-        { label: "Đàm phán", value: "Đàm phán" },
-        { label: "Đã đàm phán (Chưa bắt đầu)", value: "Chưa bắt đầu" },
-        { label: "Đã bắt đầu", value: "Bắt đầu" },
-        { label: "Đã kết thúc", value: "Kết thúc" },
+        {
+          label: "Đàm phán",
+          value: "Đàm phán",
+          key: "negotiate",
+          color: COLORS.negotiate,
+        },
+        {
+          label: "Đã đàm phán",
+          value: "Chưa bắt đầu",
+          key: "not_started",
+          color: COLORS.not_started,
+        },
+        {
+          label: "Đã bắt đầu",
+          value: "Bắt đầu",
+          key: "started",
+          color: COLORS.started,
+        },
+        {
+          label: "Đã kết thúc",
+          value: "Kết thúc",
+          key: "finished",
+          color: COLORS.finished,
+        },
       ],
       form: {
         name: "",
         timeStart: "",
         timeEnd: "",
-        guarantee: "",
+        maintenance: "",
         status: "",
       },
       rules: {
@@ -129,10 +161,10 @@ export default {
             trigger: "blur",
           },
         ],
-        guarantee: [
+        maintenance: [
           {
             required: true,
-            message: "Yêu cầu nhập số ngày bảo hành (dự kiến)",
+            message: "Yêu cầu nhập ngày kết thúc (dự kiến)",
             trigger: "blur",
           },
         ],
@@ -151,12 +183,30 @@ export default {
     dialogWidth() {
       if (this.$vssWidth < WINDOW_SIZE.sm) return "80%";
       if (this.$vssWidth < WINDOW_SIZE.md) return "70%";
-      if (this.$vssWidth < WINDOW_SIZE.lg) return "50%";
-      if (this.$vssWidth < WINDOW_SIZE.xl) return "40%";
+      if (this.$vssWidth < WINDOW_SIZE.lg) return "60%";
+      if (this.$vssWidth < WINDOW_SIZE.xl) return "50%";
 
-      console.log(this.$vssWidth);
+      return "40%";
+    },
+    pickerStartOptions() {
+      return {
+        disabledDate: (time) => {
+          if (!this.form.timeEnd) return false;
 
-      return "30%";
+          const _timeEnd = new Date(this.form.timeEnd).getTime();
+          return time.getTime() > _timeEnd;
+        },
+      };
+    },
+    pickerEndOptions() {
+      return {
+        disabledDate: (time) => {
+          if (!this.form.timeStart) return false;
+
+          const _timeStart = new Date(this.form.timeStart).getTime();
+          return time.getTime() < _timeStart;
+        },
+      };
     },
   },
   methods: {

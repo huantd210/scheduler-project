@@ -7,7 +7,6 @@
       placeholder="Ngày bắt đầu"
       size="small"
       format="dd/MM/yyyy"
-      :picker-options="pickerOptions"
       @change="onConfigChange"
     >
     </el-date-picker>
@@ -17,6 +16,8 @@
       placeholder="Phạm vi"
       size="small"
       clearable
+      allow-create
+      filterable
       @change="onConfigChange"
     >
       <el-option
@@ -42,11 +43,6 @@ export default {
   name: "schedule-filter",
   data() {
     return {
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-      },
       options: [
         { label: "3 Tháng", value: 3 },
         { label: "6 Tháng", value: 6 },

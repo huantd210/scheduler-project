@@ -35,11 +35,12 @@
         <el-col :span="11">
           <el-form-item prop="timeStart">
             <el-date-picker
+              style="width: 100%"
               type="date"
-              placeholder="Ngày bắt đầu"
               v-model="form.timeStart"
               size="small"
-              style="width: 100%"
+              :picker-options="pickerStartOptions"
+              placeholder="Ngày bắt đầu"
             ></el-date-picker>
           </el-form-item>
         </el-col>
@@ -47,24 +48,28 @@
         <el-col :span="11">
           <el-form-item prop="timeEnd">
             <el-date-picker
-              placeholder="Ngày kết thúc"
+              style="width: 100%"
               v-model="form.timeEnd"
               size="small"
-              style="width: 100%"
+              :picker-options="pickerEndOptions"
+              placeholder="Ngày kết thúc"
             ></el-date-picker>
           </el-form-item>
         </el-col>
       </el-form-item>
-      <el-form-item label="Bảo hành (Ngày)" required>
+      <el-form-item label="Bảo trì">
         <el-col :span="11">
-          <el-form-item prop="guarantee">
+          <el-form-item prop="maintenance">
             <el-input-number
-              v-model="form.guarantee"
+              v-model="form.maintenance"
               :min="0"
               size="small"
               style="width: 100%"
             ></el-input-number>
           </el-form-item>
+        </el-col>
+        <el-col :span="4">
+          <span class="px-2">(ngày)</span>
         </el-col>
       </el-form-item>
     </el-form>
@@ -85,15 +90,15 @@ export default {
     return {
       optionsStatus: [
         { label: "Đàm phán", value: "Đàm phán" },
-        { label: "Đã đàm phán (Chưa bắt đầu)", value: "Chưa bắt đầu" },
-        { label: "Đã bắt đầu", value: "Bắt đầu" },
-        { label: "Đã kết thúc", value: "Kết thúc" },
+        { label: "Chưa bắt đầu", value: "Chưa bắt đầu" },
+        { label: "Bắt đầu", value: "Bắt đầu" },
+        { label: "Kết thúc", value: "Kết thúc" },
       ],
       form: {
         name: "",
         timeStart: "",
         timeEnd: "",
-        guarantee: "",
+        maintenance: "",
         status: "",
       },
       rules: {
@@ -125,13 +130,6 @@ export default {
             trigger: "blur",
           },
         ],
-        guarantee: [
-          {
-            required: true,
-            message: "Yêu cầu nhập số ngày bảo hành (dự kiến)",
-            trigger: "blur",
-          },
-        ],
       },
     };
   },
@@ -155,12 +153,30 @@ export default {
     dialogWidth() {
       if (this.$vssWidth < WINDOW_SIZE.sm) return "80%";
       if (this.$vssWidth < WINDOW_SIZE.md) return "70%";
-      if (this.$vssWidth < WINDOW_SIZE.lg) return "50%";
-      if (this.$vssWidth < WINDOW_SIZE.xl) return "40%";
+      if (this.$vssWidth < WINDOW_SIZE.lg) return "60%";
+      if (this.$vssWidth < WINDOW_SIZE.xl) return "50%";
 
-      console.log(this.$vssWidth);
+      return "40%";
+    },
+    pickerStartOptions() {
+      return {
+        disabledDate: (time) => {
+          if (!this.form.timeEnd) return false;
 
-      return "30%";
+          const _timeEnd = new Date(this.form.timeEnd).getTime();
+          return time.getTime() > _timeEnd;
+        },
+      };
+    },
+    pickerEndOptions() {
+      return {
+        disabledDate: (time) => {
+          if (!this.form.timeStart) return false;
+
+          const _timeStart = new Date(this.form.timeStart).getTime();
+          return time.getTime() < _timeStart;
+        },
+      };
     },
   },
   methods: {
