@@ -3,12 +3,12 @@
     ref="prPopover"
     placement="left"
     trigger="hover"
-    transition="app-tooltip"
     :popper-options="{
       boundariesElement: 'viewport',
       removeOnDestroy: true,
     }"
-    :open-delay="300"
+    :open-delay="200"
+    :close-delay="0"
     @show="onPopperShow"
   >
     <div class="space-y-2" style="top: 0">
@@ -203,8 +203,7 @@ export default {
   mounted() {
     this.$refs.prPopover.$el.addEventListener("mouseenter", this.mouseEnter);
   },
-
-  beforeDestroyed: function () {
+  beforeDestroy() {
     this.$refs.prPopover.$el.removeEventListener("mouseenter", this.mouseEnter);
   },
 };
