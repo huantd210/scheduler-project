@@ -1,14 +1,15 @@
 <template>
   <el-popover
-    ref="processPopover"
+    ref="prPopover"
     placement="left"
     trigger="hover"
+    transition="app-tooltip"
     :popper-options="{
       boundariesElement: 'viewport',
       removeOnDestroy: true,
     }"
     :open-delay="300"
-    @show="onShow"
+    @show="onPopperShow"
   >
     <div class="space-y-2" style="top: 0">
       <span class="block">
@@ -83,6 +84,12 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      mouseX: 0,
+      mouseY: 0,
+    };
   },
   computed: {
     ...mapState(["config"]),
@@ -178,11 +185,27 @@ export default {
         },
       });
     },
-    onShow() {
-      console.log(this.$refs.processPopover);
-      // this.$refs.processPopover.$el.offsetTop = 0;
-      // this.$refs.processPopover.$el.offsetLeft = 0;
+    onPopperShow() {
+      this.$nextTick(() => {
+        const prPopperElm = this.$refs.prPopover.popperElm;
+        prPopperElm.style.transform += `translateX(${
+          this.mouseX - prPopperElm.offsetWidth
+        }px)`;
+
+        this.$refs.prPopover.doShow();
+      });
     },
+    mouseEnter(event) {
+      this.mouseX = event?.pageX;
+      this.mouseY = event?.pageY;
+    },
+  },
+  mounted() {
+    this.$refs.prPopover.$el.addEventListener("mouseenter", this.mouseEnter);
+  },
+
+  beforeDestroyed: function () {
+    this.$refs.prPopover.$el.removeEventListener("mouseenter", this.mouseEnter);
   },
 };
 </script>
