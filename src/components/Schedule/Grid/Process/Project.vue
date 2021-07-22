@@ -8,7 +8,9 @@
       overflow-hidden
     "
   >
-    <div :style="devColor" class="process__project--dev"></div>
+    <div :style="devColor" class="process__project--dev">
+      {{ project.name }}
+    </div>
     <div
       v-if="project.isFinished"
       :style="maintenanceColor"
