@@ -13,6 +13,8 @@ const secureLS = new SecureLS({
   encryptionSecret: process.env.VUE_APP_SECURE_LS_SECRET,
 });
 
+secureLS.clear();
+
 export default new Vuex.Store({
   modules: {
     config: moduleConfig,
