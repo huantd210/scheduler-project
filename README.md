@@ -1,5 +1,5 @@
 ## Demo schedule project
-See [Demo](https://dev.d1ux4zjg89bqac.amplifyapp.com)
+See [Demo](https://dev.d1ux4zjg89bqac.amplifyapp.com/).
 
 ## Project setup
 
