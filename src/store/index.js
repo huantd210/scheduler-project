@@ -8,9 +8,9 @@ import moduleProject from "./modules/project";
 Vue.use(Vuex);
 
 const secureLS = new SecureLS({
-  encodingType: "aes",
+  encodingType: "rabbit",
+  isCompression: false,
   encryptionSecret: process.env.VUE_APP_SECURE_LS_SECRET,
-  isCompression: true,
 });
 
 export default new Vuex.Store({
