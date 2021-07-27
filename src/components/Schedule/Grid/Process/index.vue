@@ -195,16 +195,18 @@ export default {
         this.$refs.prPopover.doShow();
       });
     },
-    mouseEnter(event) {
+    onMouse(event) {
       this.mouseX = event?.pageX;
       this.mouseY = event?.pageY;
     },
   },
   mounted() {
-    this.$refs.prPopover.$el.addEventListener("mouseenter", this.mouseEnter);
+    this.$refs.prPopover.$el.addEventListener("mouseenter", this.onMouse);
+    this.$refs.prPopover.$el.addEventListener("mousemove", this.onMouse);
   },
   beforeDestroy() {
-    this.$refs.prPopover.$el.removeEventListener("mouseenter", this.mouseEnter);
+    this.$refs.prPopover.$el.removeEventListener("mouseenter", this.onMouse);
+    this.$refs.prPopover.$el.removeEventListener("mousemove", this.onMouse);
   },
 };
 </script>

@@ -84,6 +84,6 @@ export default {
   grid-row: 2 / 3;
   overflow: hidden;
   overflow-y: scroll;
-  overscroll-behavior: contain;
+  /* overscroll-behavior: contain; */
 }
 </style>
